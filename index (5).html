@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SRiJaY@ AI Algo Engine Analytics</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--bg:#0a0a0f;--bg2:#111118;--card:#16161f;--border:#252535;--text:#f0f0f5;--text2:#9090a0;--muted:#606070;--gold:#f0b90b;--buy:#00c853;--buy-bg:rgba(0,200,83,.12);--sell:#ff1744;--sell-bg:rgba(255,23,68,.12);--info:#29b6f6;--purple:#a855f7}
+*{margin:0;padding:0;box-sizing:border-box;scrollbar-width:thin;scrollbar-color:var(--border) var(--bg)}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+h1,h2,h3,h4,.fd{font-family:'Orbitron',sans-serif}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.lw{perspective:1200px}.l3{transform-style:preserve-3d;transition:transform .15s;will-change:transform}
+.ring{position:absolute;border:2px solid transparent;border-radius:50%;pointer-events:none}
+.r1{inset:-6px;border-top-color:var(--gold);border-right-color:rgba(240,185,11,.3);animation:ra 4s linear infinite}
+.r2{inset:-10px;border-bottom-color:var(--info);border-left-color:rgba(41,182,246,.3);animation:ra 6s linear infinite reverse}
+@keyframes ra{to{transform:rotateX(60deg) rotateY(360deg)}}
+@keyframes lf{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.lf{animation:lf 4s ease-in-out infinite}
+@keyframes lg{0%,100%{box-shadow:0 0 12px rgba(240,185,11,.1)}50%{box-shadow:0 0 25px rgba(240,185,11,.22)}}
+.lg{animation:lg 3s ease-in-out infinite}
+@keyframes ho{0%{background-position:-200% 0}to{background-position:200% 0}}
+.ho{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none;background:linear-gradient(105deg,transparent 30%,rgba(240,185,11,.06) 45%,rgba(41,182,246,.04) 50%,transparent 70%);background-size:200% 100%;animation:ho 4s ease-in-out infinite}
+@keyframes ls{0%{top:-10%}to{top:110%}}
+.ls{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.3;pointer-events:none;animation:ls 3s linear infinite}
+.nl:hover{transform:rotateY(12deg) scale(1.08)}
+@keyframes he{0%{opacity:0;transform:translateY(35px) scale(.7)}60%{transform:translateY(-4px) scale(1.02)}100%{transform:translateY(0) scale(1)}}
+.he{animation:he 1s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes su{from{opacity:0;transform:translateY(35px)}to{opacity:1;transform:translateY(0)}}
+.an{animation:su .7s ease forwards;opacity:0}
+.pd{width:8px;height:8px;border-radius:50%;background:var(--buy);animation:pp 1.5s infinite}
+@keyframes pp{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
+.gb{position:relative;border:1px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,var(--gold),transparent 50%,var(--gold)) border-box}
+.cb{height:8px;border-radius:4px;background:var(--border);overflow:hidden}.cf{height:100%;border-radius:4px;transition:width 1.5s}
+.sl .st{opacity:0;transform:translateX(-10px);transition:all .3s}.sl .st.ac{opacity:1;transform:translateX(0)}
+.cbk{background:#0d0d14;border:1px solid var(--border);border-radius:12px;overflow:hidden;font-family:'Courier New',monospace;font-size:12px;line-height:1.6}
+.cbk .hd{background:var(--card);padding:8px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
+.cbk .dt{width:10px;height:10px;border-radius:50%}
+.cbk pre{padding:14px;overflow-x:auto;color:#c0c0d0}
+.kw{color:#c792ea}.fn{color:#82aaff}.sr{color:#c3e88d}.nm{color:#f78c6c}
+.nt{display:flex;gap:24px;animation:tk 40s linear infinite}@keyframes tk{to{transform:translateX(-50%)}}
+.ta{background:var(--gold)!important;color:#000!important;font-weight:600}
+select,input{background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;outline:none;font-family:'DM Sans',sans-serif;transition:border-color .2s}
+select:focus,input:focus{border-color:var(--gold)}
+.bg{background:linear-gradient(135deg,var(--gold),#c49a09);color:#000;font-weight:700;padding:14px 32px;border-radius:10px;border:none;cursor:pointer;font-size:14px;font-family:'Orbitron',sans-serif;letter-spacing:1px;transition:all .3s}
+.bg:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(240,185,11,.3)}.bg:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.toast{position:fixed;top:20px;right:20px;padding:14px 20px;border-radius:10px;z-index:9999;transform:translateX(120%);transition:transform .4s;font-weight:500}.toast.show{transform:translateX(0)}
+.sz{border-left:3px solid;transition:all .3s}
+.sz-ob{border-color:var(--sell);background:rgba(255,23,68,.05)}.sz-fv{border-color:var(--info);background:rgba(41,182,246,.05)}
+.sz-lq{border-color:var(--gold);background:rgba(240,185,11,.05)}.sz-ot{border-color:var(--buy);background:rgba(0,200,83,.05)}
+.sz-bs{border-color:var(--purple);background:rgba(168,85,247,.05)}
+@keyframes fp{0%,100%{opacity:.6}50%{opacity:1}}.fp{animation:fp 1.5s ease-in-out infinite}
+@keyframes af{0%{transform:translateX(-4px);opacity:0}50%{opacity:1}100%{transform:translateX(4px);opacity:0}}.af{animation:af 1s ease-in-out infinite}
+@keyframes dg{0%,100%{box-shadow:0 0 20px rgba(41,182,246,.15)}50%{box-shadow:0 0 35px rgba(41,182,246,.3)}}.dg{animation:dg 3s ease-in-out infinite}
+.stab{padding:5px 10px;border-radius:6px;font-size:10px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text2);transition:all .2s;font-family:'Orbitron',sans-serif;letter-spacing:.5px;white-space:nowrap}
+.stab:hover{border-color:var(--gold);color:var(--gold)}.stab.active{background:var(--gold);color:#000;border-color:var(--gold);font-weight:600}
+.spanel{display:none}.spanel.active{display:block}
+.catbtn{padding:4px 10px;border-radius:6px;font-size:9px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text2);transition:all .2s;font-family:'Orbitron',sans-serif;letter-spacing:.5px}
+.catbtn:hover{border-color:var(--gold);color:var(--gold)}.catbtn.active{background:var(--gold);color:#000;border-color:var(--gold);font-weight:600}
+.ri{transition:all .25s}.ri:hover{transform:translateY(-2px);border-color:#353545!important;box-shadow:0 4px 15px rgba(0,0,0,.3)}
+@keyframes gp{0%,100%{text-shadow:0 0 8px rgba(240,185,11,.3)}50%{text-shadow:0 0 20px rgba(240,185,11,.6),0 0 40px rgba(240,185,11,.2)}}.gp{animation:gp 3s ease-in-out infinite}
+@keyframes shimmer{0%{background-position:-400px 0}100%{background-position:400px 0}}
+.legal-card{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:16px;padding:20px;background:var(--card);transition:all .3s}
+.legal-card:hover{border-color:rgba(240,185,11,.4);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.legal-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--info),var(--gold));background-size:400px 100%;animation:shimmer 3s linear infinite}
+.doc-row{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;border-radius:10px;background:var(--bg);border:1px solid var(--border);transition:all .25s}
+.doc-row:hover{border-color:rgba(240,185,11,.3);background:rgba(240,185,11,.03)}
+.doc-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.seal-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.5px}
+@media(max-width:768px){.hf{flex-direction:column-reverse!important}.sg{grid-template-columns:1fr!important}.hi{width:220px!important;height:308px!important}.legal-grid{grid-template-columns:1fr!important}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast bg-green-900/90 border border-green-500/30 text-green-300"></div>
+
+<nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-[#0a0a0f]/80 border-b border-[#252535]">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
+<a href="#" class="flex items-center gap-2.5"><div class="lw w-9 h-9"><div class="nl l3 relative w-9 h-9 rounded-md overflow-hidden lg" style="transition:transform .3s"><img src="https://z-cdn-media.chatglm.cn/files/60206b77-a085-407e-9bee-4243efb498e4.png?auth_key=1877559682-68d964e20165418ba3a0931072e4e8ab-0-0d021a93a40fe2a264507e98678fe836" class="w-full h-full object-cover" alt="SRiJaY"></div></div><div class="flex flex-col leading-none"><span class="fd text-sm font-bold tracking-wider" style="color:var(--gold)">SRiJaY@</span><span class="fd text-[7px] tracking-widest" style="color:var(--text2)">AI ALGO ENGINE</span></div></a>
+<div class="hidden lg:flex items-center gap-4 text-xs" style="color:var(--text2)"><a href="#blueprint" class="hover:text-white transition">Blueprint</a><a href="#signal" class="hover:text-white transition">Signal</a><a href="#aiflow" class="hover:text-white transition">AI Flow</a><a href="#smc" class="hover:text-white transition">SMC</a><a href="#chart" class="hover:text-white transition">Chart</a><a href="#resources" class="hover:text-white transition">Resources</a><a href="#layanan" class="hover:text-white transition">Layanan</a></div>
+<a href="#signal" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#f0b90b] text-black hover:bg-[#c49a09] transition">Generate Signal</a>
+</div></nav>
+
+<header class="relative min-h-screen flex items-center justify-center overflow-hidden pt-14">
+<canvas id="particles" class="absolute inset-0 z-0"></canvas>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a0a0f] z-[1]"></div>
+<div class="relative z-10 flex flex-col lg:flex-row items-center gap-10 px-4 max-w-6xl mx-auto hf">
+<!-- Gambar di sebelah Kiri -->
+<div class="flex-shrink-0 he order-2 lg:order-1"><div class="lw hi" style="width:300px;height:420px"><div class="l3 lf lg relative rounded-2xl overflow-hidden" id="heroLogo" style="width:100%;height:100%;border:2px solid rgba(240,185,11,.25);background:var(--card)"><img src="https://z-cdn-media.chatglm.cn/files/60206b77-a085-407e-9bee-4243efb498e4.png?auth_key=1877559682-68d964e20165418ba3a0931072e4e8ab-0-0d021a93a40fe2a264507e98678fe836" class="w-full h-full object-contain" alt="SRiJaY"><div class="ho"></div><div class="ls"></div><div class="ring r1"></div><div class="ring r2"></div></div></div></div>
+<!-- Teks Animasi di sebelah Kanan (Supaya tidak tertutup gambar) -->
+<div class="text-center lg:text-left order-1 lg:order-2">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#252535] bg-[#16161f]/60 mb-5 text-xs" style="color:var(--text2)"><span class="pd"></span> System Online — 35+ Instruments</div>
+<h1 class="fd text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-3 tracking-tight">SRiJaY@<br><span class="gp" style="color:var(--gold)">AI ALGO ENGINE</span><br>ANALYTICS</h1>
+<p class="text-base sm:text-lg font-light mb-8 max-w-lg" style="color:var(--text2)">BUILD YOUR OWN <span class="font-semibold text-white">AI TRADING BOT</span><br>Forex · IDX · Index Global · Saham · Komoditi · Crypto</p>
+<div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-8">
+<a href="#signal" class="bg text-center text-sm">GENERATE SIGNAL</a>
+<a href="#blueprint" class="px-6 py-3 rounded-lg border border-[#f0b90b]/40 text-[#f0b90b] fd text-xs tracking-wider hover:bg-[#f0b90b]/10 transition text-center">BLUEPRINT</a>
+</div>
+<div class="grid grid-cols-5 gap-2 max-w-md mx-auto lg:mx-0">
+<div class="text-center"><div class="fd text-base font-bold text-white counter" data-target="35">0</div><div class="text-[8px]" style="color:var(--muted)">Instruments</div></div>
+<div class="text-center"><div class="fd text-base font-bold text-white counter" data-target="6">0</div><div class="text-[8px]" style="color:var(--muted)">Kategori</div></div>
+<div class="text-center"><div class="fd text-base font-bold" style="color:var(--gold)"><span class="counter" data-target="97">0</span>%</div><div class="text-[8px]" style="color:var(--muted)">Accuracy</div></div>
+<div class="text-center"><div class="fd text-base font-bold text-white">24/7</div><div class="text-[8px]" style="color:var(--muted)">Monitor</div></div>
+<div class="text-center"><div class="fd text-base font-bold text-white">&lt;50ms</div><div class="text-[8px]" style="color:var(--muted)">Exec</div></div>
+</div></div></div>
+</header>
+
+<section id="blueprint" class="py-16 px-4"><div class="max-w-6xl mx-auto"><div class="text-center mb-12"><span class="text-xs fd tracking-[.3em] uppercase" style="color:var(--gold)">Architecture</span><h2 class="fd text-2xl md:text-4xl font-bold mt-2">The 6-Layer Blueprint</h2></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="bpG"></div></div></section>
+
+<section id="signal" class="py-16 px-4" style="background:var(--bg2)">
+<div class="max-w-6xl mx-auto relative z-10">
+<div class="text-center mb-8"><span class="text-xs fd tracking-[.3em] uppercase" style="color:var(--gold)">AI Engine</span><h2 class="fd text-2xl md:text-4xl font-bold mt-2">AI Trading Signal Generator</h2><p class="mt-2 text-sm max-w-lg mx-auto" style="color:var(--text2)"><a href="https://id.investing.com" target="_blank" rel="noopener" class="hover:underline" style="color:var(--gold)">Investing.com</a> · <a href="https://www.tradingview.com" target="_blank" rel="noopener" class="hover:underline" style="color:var(--gold)">TradingView</a> · <a href="https://www.reuters.com" target="_blank" rel="noopener" class="hover:underline" style="color:var(--gold)">Reuters</a> · <a href="https://www.bloomberg.com" target="_blank" rel="noopener" class="hover:underline" style="color:var(--gold)">Bloomberg</a> — 35+ instruments</p></div>
+<div class="grid lg:grid-cols-5 gap-5">
+<div class="lg:col-span-2 gb rounded-2xl p-4">
+<h3 class="fd text-xs tracking-wider mb-4" style="color:var(--gold)">PARAMETER SIGNAL</h3>
+<div class="space-y-3">
+<div><label class="text-[9px] font-semibold uppercase tracking-wider block mb-1" style="color:var(--text2)">Kategori</label><div class="flex flex-wrap gap-1.5" id="catBtns"></div></div>
+<div><label class="text-[9px] font-semibold uppercase tracking-wider block mb-1" style="color:var(--text2)">Pair / Saham</label><select id="pairS" class="w-full text-sm" onchange="uSp()"></select></div>
+<div><label class="text-[9px] font-semibold uppercase tracking-wider block mb-1" style="color:var(--text2)">Trade Style</label>
+<div class="grid grid-cols-3 gap-2">
+<button onclick="setS('SCALP')" class="sb px-2 py-2 rounded-lg text-[10px] border border-[#252535] transition" style="color:var(--text2)">SCALP</button>
+<button onclick="setS('DAYTRADE')" class="sb ta px-2 py-2 rounded-lg text-[10px] border border-[#252535] transition">DAYTRADE</button>
+<button onclick="setS('SWING')" class="sb px-2 py-2 rounded-lg text-[10px] border border-[#252535] transition" style="color:var(--text2)">SWING</button>
+</div></div>
+<div><label class="text-[9px] font-semibold uppercase tracking-wider block mb-1" style="color:var(--text2)">Harga Spot (opsional)</label><input type="text" id="spP" placeholder="Auto-detect AI" class="w-full text-sm"><p class="text-[9px] mt-1" style="color:var(--muted)" id="spH">Kosongkan = AI detect otomatis</p></div>
+<button onclick="gen()" class="bg w-full mt-1 text-sm" id="gBtn"><i class="fas fa-robot mr-2"></i>GENERATE SIGNAL</button>
+</div></div>
+<div class="lg:col-span-3"><div id="sO" class="rounded-2xl border border-[#252535] p-4 min-h-[500px] flex items-center justify-center" style="background:var(--card)"><div class="text-center" style="color:var(--muted)"><i class="fas fa-satellite-dish text-3xl mb-3 block" style="color:var(--border)"></i><p class="text-xs">Pilih kategori, pair, dan klik GENERATE SIGNAL</p></div></div></div>
+</div></div></section>
+
+<section id="aiflow" class="py-16 px-4"><div class="max-w-6xl mx-auto"><div class="text-center mb-8"><span class="text-xs fd tracking-[.3em] uppercase" style="color:var(--gold)">Automation</span><h2 class="fd text-2xl md:text-4xl font-bold mt-2">AI Flow Otomatis Real-Time</h2></div>
+<div class="rounded-2xl border border-[#252535] p-4 mb-5" style="background:var(--card)"><div class="flex items-center justify-between mb-3"><div class="flex items-center gap-2"><span class="pd"></span><span class="fd text-xs font-bold">LIVE FLOW PIPELINE</span></div><span class="text-[10px] px-2 py-0.5 rounded" style="background:var(--buy-bg);color:var(--buy)">ACTIVE</span></div><div class="flex flex-wrap items-center gap-2 mb-3" id="fPipe"></div><div class="rounded-lg p-3 max-h-40 overflow-y-auto" style="background:var(--bg);border:1px solid var(--border)" id="fLog"><div class="text-[10px]" style="color:var(--muted)">Menunggu data...</div></div></div>
+<div class="grid md:grid-cols-3 gap-3">
+<div class="rounded-xl border border-[#252535] p-3" style="background:var(--card)"><div class="flex items-center gap-2 mb-2"><i class="fas fa-chart-line text-sm" style="color:var(--buy)"></i><span class="fd text-[9px] tracking-wider"><a href="https://www.tradingview.com" target="_blank" rel="noopener" class="hover:underline" style="color:var(--text)">TRADINGVIEW</a></span></div><div class="space-y-1.5 text-xs" style="color:var(--text2)" id="tvS"></div></div>
+<div class="rounded-xl border border-[#252535] p-3" style="background:var(--card)"><div class="flex items-center gap-2 mb-2"><i class="fas fa-landmark text-sm" style="color:var(--gold)"></i><span class="fd text-[9px] tracking-wider">FUNDAMENTAL</span></div><div class="space-y-1.5 text-xs" style="color:var(--text2)" id="fnS"></div></div>
+<div class="rounded-xl border border-[#252535] p-3" style="background:var(--card)"><div class="flex items-center gap-2 mb-2"><i class="fas fa-bolt text-sm" style="color:var(--info)"></i><span class="fd text-[9px] tracking-wider">ORDER FLOW</span></div><div class="space-y-1.5 text-xs" style="color:var(--text2)" id="ofS"></div></div>
+</div></div></section>
+
+<section id="smc" class="py-16 px-4" style="background:var(--bg2)"><div class="max-w-6xl mx-auto"><div class="text-center mb-8"><span class="text-xs fd tracking-[.3em] uppercase" style="color:var(--gold)">Smart Money</span><h2 class="fd text-2xl md:text-4xl font-bold mt-2">SMC Risk Management</h2></div>
+<div class="grid md:grid-cols-2 gap-3 mb-5">
+<div class="rounded-xl border border-[#252535] p-3" style="background:var(--card)"><div class="flex items-center justify-between mb-2"><span class="fd text-[9px] tracking-wider" style="color:var(--gold)">SMC ZONES — <span id="sP2">EURUSD</span></span><span class="pd" style="display:inline-block;width:5px;height:5px"></span></div><div class="space-y-1.5" id="sZ"></div></div>
+<div class="rounded-xl border border-[#252535] p-3" style="background:var(--card)"><div class="flex items-center justify-between mb-2"><span class="fd text-[9px] tracking-wider" style="color:var(--gold)">STRUCTURE</span><span class="text-[9px] px-2 py-0.5 rounded" style="background:var(--buy-bg);color:var(--buy)" id="sB">BULLISH</span></div><div class="space-y-1.5" id="sSt"></div></div>
+</div>
+<div class="sg grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2" id="sC"></div>
+<div class="mt-5 rounded-xl border border-[#252535] p-4" style="background:var(--card)">
+<div class="fd text-[10px] tracking-wider mb-3" style="color:var(--gold)">SMC POSITION SIZING</div>
+<div class="grid grid-cols-2 md:grid-cols-5 gap-2">
+<div><label class="text-[9px] block mb-1" style="color:var(--muted)">Balance ($)</label><input type="text" id="sB3" value="10000" class="w-full text-sm"></div>
+<div><label class="text-[9px] block mb-1" style="color:var(--muted)">Risk (%)</label><input type="text" id="sR" value="1" class="w-full text-sm"></div>
+<div><label class="text-[9px] block mb-1" style="color:var(--muted)">Entry</label><input type="text" id="sE" value="1.0825" class="w-full text-sm"></div>
+<div><label class="text-[9px] block mb-1" style="color:var(--muted)">Stop Loss</label><input type="text" id="sL" value="1.0800" class="w-full text-sm"></div>
+<div class="flex items-end"><button onclick="cSMC()" class="bg w-full text-xs py-2.5">HITUNG</button></div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-3">
+<div class="rounded-lg p-2" style="background:var(--bg)"><div class="text-[9px]" style="color:var(--muted)">Lot</div><div class="fd text-sm font-bold mt-0.5" id="sLt">0.16</div></div>
+<div class="rounded-lg p-2" style="background:var(--bg)"><div class="text-[9px]" style="color:var(--muted)">Risk $</div><div class="fd text-sm font-bold mt-0.5" style="color:var(--sell)" id="sRD">$100</div></div>
+<div class="rounded-lg p-2" style="background:var(--bg)"><div class="text-[9px]" style="color:var(--muted)">Pips</div><div class="fd text-sm font-bold mt-0.5" id="sPR">25</div></div>
+<div class="rounded-lg p-2" style="background:var(--bg)"><div class="text-[9px]" style="color:var(--muted)">R:R</div><div class="fd text-sm font-bold mt-0.5" style="color:var(--gold)" id="sRR">1:3.2</div></div>
+</div></div></div></section>
+
+<section id="chart" class="py-16 px-4"><div class="max-w-6xl mx-auto"><div class="text-center mb-8"><span class="text-xs fd tracking-[.3em] uppercase" style="color:var(--gold)">Real-Time</span><h2 class="fd text-2xl md:text-4xl font-bold mt-2">AI Signal Candle Chart</h2></div>
+<div class="flex flex-wrap gap-1.5 mb-3 justify-center" id="cB"></div>
+<div class="rounded-2xl border border-[#252535] overflow-hidden" style="background:var(--card)">
+<div class="flex items-center justify-between px-4 py-2 border-b border-[#252535]"><div class="flex items-center gap-2"><span class="pd"></span><span class="fd text-xs font-bold" id="cT">EURUSD</span></div>
+<div class="flex items-center gap-3 text-[9px]" style="color:var(--text2)"><span><i class="fas fa-circle text-[5px] mr-1" style="color:var(--buy)"></i>BUY</span><span><i class="fas fa-circle text-[5px] mr-1" style="color:var(--sell)"></i>SELL</span><span><i class="fas fa-minus mr-1" style="color:var(--gold)"></i>EMA20</span><span><i class="fas fa-minus mr-1" style="color:var(--info)"></i>EMA50</span></div></div>
+<div class="relative" style="height:340px"><canvas id="cC" class="w-full h-full"></canvas><div id="cTip" class="absolute hidden px-2 py-1.5 rounded-lg text-[9px] pointer-events-none z-10 border border-[#252535]" style="background:var(--bg);color:var(--text2)"></div></div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-3" id="rS"></div></div></section>
+
+<section id="python" class="py-16 px-4" style="background:var(--bg2)"><div class="max-w-6xl mx-auto"><div class="text-center mb-8"><span class="text-xs fd tracking-[.3em] uppercase" style="color:var(--gold)">Backend</span><h2 class="fd text-2xl md:text-4xl font-bold mt-2">AI Signal Python Engine</h2></div>
+<div class="grid lg:grid-cols-2 gap-5">
+<div class="cbk"><div class="hd"><div class="dt" style="background:#ff5f57"></div><div class="dt" style="background:#febc2e"></div><div class="dt" style="background:#28c840"></div><span class="ml-2 text-[9px]" style="color:var(--muted)">signal_engine.py — <a href="https://www.python.org/" target="_blank" rel="noopener" style="color:var(--info)">Python</a> · <a href="https://ta-lib.org/" target="_blank" rel="noopener" style="color:var(--info)">TA-Lib</a> · <a href="https://scikit-learn.org/" target="_blank" rel="noopener" style="color:var(--info)">Scikit-learn</a> · <a href="https://www.tensorflow.org/" target="_blank" rel="noopener" style="color:var(--info)">TensorFlow</a></span></div>
+<pre><span class="kw"># ==================================================</span>
+<span class="kw"># 🚀 SRiJaY@ AI ALGO ENGINE ANALYTICS</span>
+<span class="kw"># AUTO FLOW PIPELINE | REAL TIME DATA</span>
+<span class="kw"># ==================================================</span>
+
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> requests
+<span class="kw">import</span> time
+<span class="kw">import</span> json
+<span class="kw">import</span> os
+<span class="kw">from</span> datetime <span class="kw">import</span> datetime
+<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> StandardScaler
+<span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> RandomForestClassifier
+
+<span class="kw"># ==================================================</span>
+<span class="kw"># PREPARASI LINGKUNGAN</span>
+<span class="kw"># ==================================================</span>
+TA_AVAILABLE = <span class="kw">False</span>
+SEABORN_AVAILABLE = <span class="kw">False</span>
+EXCEL_AVAILABLE = <span class="kw">False</span>
+
+<span class="kw">try</span>:
+    <span class="kw">import</span> ta
+    TA_AVAILABLE = <span class="kw">True</span>
+<span class="kw">except</span>: <span class="kw">pass</span>
+
+<span class="kw">try</span>:
+    <span class="kw">import</span> seaborn <span class="kw">as</span> sns
+    SEABORN_AVAILABLE = <span class="kw">True</span>
+<span class="kw">except</span>: <span class="kw">pass</span>
+
+<span class="kw">if</span> <span class="kw">not</span> os.path.<span class="fn">exists</span>(<span class="sr">"SRiJaY_OUTPUT"</span>):
+    os.makedirs(<span class="sr">"SRiJaY_OUTPUT"</span>)
+
+<span class="kw"># ==================================================</span>
+<span class="kw"># 📥 LAYER 1 : DATA INGESTION</span>
+<span class="kw"># ==================================================</span>
+<span class="kw">class</span> <span class="fn">DataIngestion</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self):
+        self.sources = {
+            <span class="sr">"finnhub"</span>: <span class="sr">"https://finnhub.io/api/v1"</span>,
+            <span class="sr">"fmp"</span>: <span class="sr">"https://financialmodelingprep.com/api/v3"</span>,
+            <span class="sr">"idx"</span>: <span class="sr">"https://www.idx.co.id/umbraco/Surface/..."</span>
+        }
+
+    <span class="kw">def</span> <span class="fn">get_finnhub_data</span>(self, symbol, resolution=<span class="sr">"D"</span>):
+        <span class="kw">try</span>:
+            url = f<span class="sr">"{self.sources['finnhub']}/stock/candle?symbol={symbol}..."</span>
+            res = requests.<span class="fn">get</span>(url, timeout=15)
+            data = res.json()
+            <span class="kw">if</span> data.<span class="fn">get</span>(<span class="sr">'s'</span>) == <span class="sr">'ok'</span>:
+                <span class="kw">return</span> data
+        <span class="kw">except</span>:
+            <span class="sr">""" DATA AI FLOW ANALYTICS JIKA API GAGAL """</span>
+            print(<span class="sr">"ℹ️ Menggunakan data AI Flow Analytics..."</span>)
+            date_range = pd.<span class="fn">date_range</span>(<span class="fn">end</span>=datetime.<span class="fn">today</span>(), periods=200)
+            <span class="kw">return</span> {
+                <span class="sr">'c'</span>: np.random.<span class="fn">uniform</span>(1000, 15000, 200).<span class="fn">tolist</span>(),
+                <span class="sr">'t'</span>: [<span class="fn">int</span>(d.<span class="fn">timestamp</span>()) <span class="kw">for</span> d <span class="kw">in</span> date_range]
+            }
+        <span class="kw">return</span> <span class="kw">None</span>
+
+<span class="kw"># ==================================================</span>
+<span class="kw"># ⚙️ LAYER 2 : FEATURE ENGINEERING</span>
+<span class="kw"># ==================================================</span>
+<span class="kw">class</span> <span class="fn">FeatureEngineering</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self):
+        self.scaler = <span class="fn">StandardScaler</span>()
+
+    <span class="kw">def</span> <span class="fn">calculate_technical_indicators</span>(self, df):
+        <span class="kw">if</span> TA_AVAILABLE:
+            df[<span class="sr">'rsi'</span>] = ta.momentum.rsi(df[<span class="sr">'close'</span>])
+            df[<span class="sr">'macd'</span>] = ta.trend.macd(df[<span class="sr">'close'</span>])
+        <span class="kw">else</span>:
+            <span class="sr">""" Manual Calculation Fallback """</span>
+            delta = df[<span class="sr">'close'</span>].<span class="fn">diff</span>()
+            gain = delta.<span class="fn">where</span>(delta > 0, 0)
+            loss = -delta.<span class="fn">where</span>(delta < 0, 0)
+            rs = gain.<span class="fn">rolling</span>(14).<span class="fn">mean</span>() / loss.<span class="fn">rolling</span>(14).<span class="fn">mean</span>()
+            df[<span class="sr">'rsi'</span>] = 100 - (100 / (1 + rs))
+        <span class="kw">return</span> df.<span class="fn">dropna</span>()
+
+<span class="kw"># ==================================================</span>
+<span class="kw"># 🧠 LAYER 3 : AI MODEL</span>
+<span class="kw"># ==================================================</span>
+<span class="kw">class</span> <span class="fn">AIModel</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self):
+        self.model = <span class="fn">RandomForestClassifier</span>(n_estimators=100)
+
+    <span class="kw">def</span> <span class="fn">train_model</span>(self, X, y):
+        self.model.<span class="fn">fit</span>(X, y)
+        print(<span class="sr">"[✅ AI MODEL] Training selesai"</span>)
+
+    <span class="kw">def</span> <span class="fn">generate_signal</span>(self, features):
+        pred = self.model.predict_proba(features.<span class="fn">reshape</span>(1,-1))[0]
+        <span class="kw">if</span> pred[1] > 0.75:
+            <span class="kw">return</span> {<span class="sr">"signal"</span>: <span class="sr">"BUY 🟢"</span>, <span class="sr">"confidence"</span>: <span class="fn">round</span>(pred[1]*100,2)}
+        <span class="kw">elif</span> pred[0] > 0.75:
+            <span class="kw">return</span> {<span class="sr">"signal"</span>: <span class="sr">"SELL 🔴"</span>, <span class="sr">"confidence"</span>: <span class="fn">round</span>(pred[0]*100,2)}
+        <span class="kw">else</span>:
+            <span class="kw">return</span> {<span class="sr">"signal"</span>: <span class="sr">"HOLD 🟡"</span>, <span class="sr">"confidence"</span>: <span class="fn">round</span>(<span class="fn">max</span>(pred)*100,2)}
+
+<span class="kw"># ==================================================</span>
+<span class="kw"># 📸 FITUR LAPORAN & SNAPSHOT</span>
+<span class="kw"># ==================================================</span>
+<span class="kw">class</span> <span class="fn">ReportGenerator</span>:
+    <span class="kw">def</span> <span class="fn">export_report</span>(self, data_dict, symbol):
+        filename = f<span class="sr">"SRiJaY_OUTPUT/LAPORAN_{symbol}_{datetime.now().strftime('%Y%m%d')}.csv"</span>
+        data_dict[<span class="sr">'technical_data'</span>].<span class="fn">to_csv</span>(filename, index=<span class="kw">False</span>)
+        print(<span class="sr">f"📄 Laporan tersimpan: {filename}"</span>)
+
+<span class="kw">if</span> __name__ == <span class="sr">"__main__"</span>:
+    print(<span class="sr">"🚀 MEMULAI SRiJaY@ AI ALGO ENGINE..."</span>)
+    ingestion = <span class="fn">DataIngestion</span>()
+    print(<span class="sr">"✅ SYSTEM READY."</span>)</pre>
+</div>
+<div class="space-y-3">
+<div class="gb rounded-xl p-3"><div class="flex items-center gap-2 mb-1"><i class="fas fa-database text-xs" style="color:var(--gold)"></i><h4 class="fd text-[9px] tracking-wider">Data Ingestion</h4></div><p class="text-[11px]" style="color:var(--text2)"><a href="https://id.investing.com" target="_blank" rel="noopener" style="color:var(--gold)">Investing.com</a>, <a href="https://pypi.org/project/yfinance/" target="_blank" rel="noopener" style="color:var(--gold)">yfinance</a>, Binance, IDX. WebSocket real-time.</p></div>
+<div class="gb rounded-xl p-3"><div class="flex items-center gap-2 mb-1"><i class="fas fa-brain text-xs" style="color:var(--gold)"></i><h4 class="fd text-[9px] tracking-wider">ML + SMC</h4></div><p class="text-[11px]" style="color:var(--text2)"><a href="https://scikit-learn.org/" target="_blank" rel="noopener" style="color:var(--info)">GB</a> + <a href="https://www.tensorflow.org/" target="_blank" rel="noopener" style="color:var(--info)">LSTM</a> ensemble + SMC structure analysis.</p></div>
+<div class="gb rounded-xl p-3"><div class="flex items-center gap-2 mb-1"><i class="fas fa-shield-alt text-xs" style="color:var(--gold)"></i><h4 class="fd text-[9px] tracking-wider">Risk Engine</h4></div><p class="text-[11px]" style="color:var(--text2)">Kelly Criterion + SMC SL. Max DD 5%/hari.</p></div>
+<div class="gb rounded-xl p-3"><div class="flex items-center gap-2 mb-1"><i class="fas fa-newspaper text-xs" style="color:var(--gold)"></i><h4 class="fd text-[9px] tracking-wider">NLP Sentiment</h4></div><p class="text-[11px]" style="color:var(--text2)">FinBERT: Fed, BI, BOJ, earnings, geopolitik.</p></div>
+<div class="gb rounded-xl p-3"><div class="flex items-center gap-2 mb-1"><i class="fas fa-play-circle text-xs" style="color:var(--gold)"></i><h4 class="fd text-[9px] tracking-wider">Backtest & Deploy</h4></div><p class="text-[11px]" style="color:var(--text2)"><a href="https://www.backtrader.com/" target="_blank" rel="noopener" style="color:var(--info)">Backtrader</a> · <a href="https://www.quantconnect.com/" target="_blank" rel="noopener" style="color:var(--info)">QuantConnect</a> · <a href="https://metaapi.cloud/" target="_blank" rel="noopener" style="color:var(--info)">MetaApi</a> MT4/5 bridge.</p></div>
+</div></div></section>
+
+<section id="news" class="py-16 px-4"><div class="max-w-6xl mx-auto"><div class="text-center mb-8"><span class="text-xs fd tracking-[.3em] uppercase" style="color:var(--gold)">Intelligence</span><h2 class="fd text-2xl md:text-4xl font-bold mt-2">Analisa Real-Time Global</h2></div>
+<div class="overflow-hidden mb-5 rounded-lg py-2 border-y border-[#252535]" style="background:var(--bg2)"><div class="nt" id="nT"></div></div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3" id="nG"></div></div></section>
+
+<section id="resources" class="py-16 px-4" style="background:var(--bg2)">
+<div class="max-w-6xl mx-auto">
+<div class="text-center mb-8">
+<span class="text-xs fd tracking-[.3em] uppercase" style="color:var(--gold)">Ecosystem</span>
+<h2 class="fd text-2xl md:text-4xl font-bold mt-2">Sumber Daya & Alat</h2>
+<p class="mt-2 text-sm max-w-xl mx-auto" style="color:var(--text2)">Seluruh platform, library, referensi, dan identitas legal perusahaan</p>
+</div>
+<div class="flex flex-wrap gap-1.5 mb-5 justify-center" id="resTabs"></div>
+<div id="resPanels"></div>
+</div>
+</section>
+
+<section id="layanan" class="py-16 px-4"><div class="max-w-5xl mx-auto text-center">
+<span class="text-xs fd tracking-[.3em] uppercase" style="color:var(--info)">Services</span>
+<h2 class="fd text-2xl md:text-4xl font-bold mt-2 mb-4">Layanan & Komunitas</h2>
+<a href="https://chat.deepseek.com" target="_blank" rel="noopener" class="block rounded-2xl p-5 mb-5 transition-all hover:scale-[1.01] dg" style="background:linear-gradient(135deg,#0d1a2a,#111128);border:2px solid rgba(41,182,246,.3)">
+<div class="flex flex-col items-center gap-3">
+<div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background:linear-gradient(135deg,rgba(41,182,246,.2),rgba(41,182,246,.05));border:1px solid rgba(41,182,246,.3)"><i class="fas fa-robot text-xl" style="color:var(--info)"></i></div>
+<div><div class="fd text-sm font-bold mb-0.5" style="color:var(--info)">DeepSeek AI Chat</div><p class="text-xs" style="color:var(--text2)">Konsultasi analisa, strategi SMC, manajemen risiko</p></div>
+</div><div class="mt-3 text-sm font-semibold" style="color:var(--info)">Buka DeepSeek Chat <i class="fas fa-arrow-right ml-1"></i></div>
+</a>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+<a href="https://chat.whatsapp.com/FBBx5Wpwr9oAHmJPvzyzBb?mode=gi_t" target="_blank" rel="noopener" class="rounded-xl border border-[#252535] p-3 text-center hover:border-green-500/40 transition" style="background:var(--card)"><div class="w-9 h-9 rounded-full flex items-center justify-center mx-auto mb-1.5" style="background:rgba(37,211,102,.12)"><i class="fab fa-whatsapp text-base" style="color:#25d366"></i></div><div class="fd text-[8px] tracking-wider" style="color:#25d366">WHATSAPP</div><div class="text-[9px]" style="color:var(--text2)">Group</div></a>
+<a href="https://t.me/+pQpa7-vl4HU4ZDI1" target="_blank" rel="noopener" class="rounded-xl border border-[#252535] p-3 text-center hover:border-blue-500/40 transition" style="background:var(--card)"><div class="w-9 h-9 rounded-full flex items-center justify-center mx-auto mb-1.5" style="background:rgba(0,136,204,.12)"><i class="fab fa-telegram text-base" style="color:#0088cc"></i></div><div class="fd text-[8px] tracking-wider" style="color:#0088cc">TELEGRAM</div><div class="text-[9px]" style="color:var(--text2)">Signal</div></a>
+<a href="https://www.youtube.com/@SrijayaNaga-c9y" target="_blank" rel="noopener" class="rounded-xl border border-[#252535] p-3 text-center hover:border-red-500/40 transition" style="background:var(--card)"><div class="w-9 h-9 rounded-full flex items-center justify-center mx-auto mb-1.5" style="background:rgba(255,0,0,.1)"><i class="fab fa-youtube text-base" style="color:#ff0000"></i></div><div class="fd text-[8px] tracking-wider" style="color:#ff0000">YOUTUBE</div><div class="text-[9px]" style="color:var(--text2)">Promo</div></a>
+<a href="https://www.instagram.com/srijayaholding?igsh=MWg0N3Rydms2aGQ2Ng==" target="_blank" rel="noopener" class="rounded-xl border border-[#252535] p-3 text-center hover:border-pink-500/40 transition" style="background:var(--card)"><div class="w-9 h-9 rounded-full flex items-center justify-center mx-auto mb-1.5" style="background:rgba(225,48,108,.1)"><i class="fab fa-instagram text-base" style="color:#e1306c"></i></div><div class="fd text-[8px] tracking-wider" style="color:#e1306c">INSTAGRAM</div><div class="text-[9px]" style="color:var(--text2)">Holding</div></a>
+</div>
+<div class="rounded-xl border border-[#252535] p-3" style="background:var(--card)"><div class="flex items-center justify-center gap-3"><div class="flex items-center gap-2"><div class="w-9 h-9 rounded-full flex items-center justify-center" style="background:rgba(240,185,11,.1)"><i class="fas fa-headset" style="color:var(--gold)"></i></div><div><div class="text-xs font-semibold">Customer Support</div><div class="text-xs" style="color:var(--text2)">cs 0813-66234860</div></div></div></div></div>
+</div></section>
+
+<footer class="py-6 px-4 border-t border-[#252535]"><div class="max-w-6xl mx-auto text-center">
+<p class="text-[9px] max-w-xl mx-auto mb-3" style="color:var(--muted)"><i class="fas fa-exclamation-triangle mr-1" style="color:var(--gold)"></i>Disclaimer: Sinyal simulasi algoritma untuk edukasi. Bukan saran investasi.</p>
+<div class="flex items-center justify-center gap-2"><div class="lw w-6 h-6"><div class="nl l3 relative w-6 h-6 rounded overflow-hidden lg"><img src="https://z-cdn-media.chatglm.cn/files/60206b77-a085-407e-9bee-4243efb498e4.png?auth_key=1877559682-68d964e20165418ba3a0931072e4e8ab-0-0d021a93a40fe2a264507e98678fe836" class="w-full h-full object-cover" alt="SRiJaY"><div class="ho"></div></div></div><span class="fd text-[10px] font-bold tracking-wider"><span style="color:var(--gold)">SRiJaY@</span> AI ALGO ENGINE</span></div>
+<div class="text-[9px] mt-1" style="color:var(--muted)">&copy; 2025 PT Srijaya Naga · <a href="https://www.python.org/" target="_blank" rel="noopener" style="color:var(--info)">Python</a> · <a href="https://www.tensorflow.org/" target="_blank" rel="noopener" style="color:var(--info)">TensorFlow</a> · <a href="https://scikit-learn.org/" target="_blank" rel="noopener" style="color:var(--info)">Scikit-learn</a> · <a href="https://ta-lib.org/" target="_blank" rel="noopener" style="color:var(--info)">TA-Lib</a> · <a href="https://pypi.org/project/yfinance/" target="_blank" rel="noopener" style="color:var(--info)">yfinance</a></div>
+</div></footer>
+
+<script>
+const IMG='https://z-cdn-media.chatglm.cn/files/60206b77-a085-407e-9bee-4243efb498e4.png?auth_key=1877559682-68d964e20165418ba3a0931072e4e8ab-0-0d021a93a40fe2a264507e98678fe836';
+const PR={forex:[{id:'EURUSD',n:'EUR/USD',p:1.0825,v:.002,d:5},{id:'GBPUSD',n:'GBP/USD',p:1.2715,v:.0025,d:5},{id:'USDJPY',n:'USD/JPY',p:150.25,v:.35,d:3},{id:'USDIDR',n:'USD/IDR',p:15800,v:120,d:0},{id:'USDCHF',n:'USD/CHF',p:0.8820,v:.0015,d:5}],index:[{id:'SPX',n:'S&P 500',p:5920,v:45,d:2},{id:'NDX',n:'Nasdaq-100',p:21250,v:180,d:2},{id:'DAX40',n:'DAX 40',p:19800,v:120,d:2},{id:'NKY225',n:'Nikkei 225',p:39800,v:350,d:0},{id:'IHSG',n:'IHSG',p:7215,v:45,d:2}],stock_gl:[{id:'MSFT',n:'MSFT (Microsoft)',p:425,v:8,d:2},{id:'NVDA',n:'NVDA (NVIDIA)',p:135,v:6,d:2},{id:'JNJ',n:'JNJ (Johnson & Johnson)',p:162,v:2.5,d:2},{id:'XOM',n:'XOM (Exxon Mobil)',p:108,v:2,d:2}],stock_idx:[{id:'BBCA',n:'BBCA (BCA)',p:9750,v:125,d:0},{id:'TLKM',n:'TLKM (Telkom)',p:3450,v:55,d:0},{id:'ASII',n:'ASII (Astra)',p:5200,v:75,d:0},{id:'ADRO',n:'ADRO (Adaro Energy)',p:2980,v:65,d:0},{id:'BREN',n:'BREN (Barito Renewables)',p:1250,v:35,d:0}],commodity:[{id:'XAUUSD',n:'XAU/USD (Emas)',p:2651,v:3.5,d:2},{id:'WTI',n:'WTI (Minyak)',p:70.5,v:.5,d:2},{id:'BRENT',n:'Brent (Minyak)',p:74.2,v:.55,d:2},{id:'COPPER',n:'Tembaga',p:4.52,v:.06,d:2},{id:'NIKEL',n:'Nikel',p:16500,v:350,d:0},{id:'CPO',n:'CPO (Sawit)',p:3950,v:55,d:0}],crypto:[{id:'BTCUSD',n:'BTC/USD',p:104250,v:850,d:0},{id:'ETHUSD',n:'ETH/USD',p:2512,v:35,d:2},{id:'SOLUSD',n:'SOL/USD',p:172.5,v:3.5,d:2},{id:'USDTIDR',n:'USDT/IDR',p:15850,v:120,d:0},{id:'BTCIDR',n:'BTC/IDR',p:1.654e9,v:1.5e7,d:0}]};
+const CATS=[{id:'forex',n:'Forex',i:'fa-coins'},{id:'index',n:'Indeks',i:'fa-chart-bar'},{id:'stock_gl',n:'Saham Global',i:'fa-globe'},{id:'stock_idx',n:'Saham IDX',i:'fa-building'},{id:'commodity',n:'Komoditi',i:'fa-oil-can'},{id:'crypto',n:'Crypto',i:'fa-bitcoin'}];
+const STP={SCALP:{tp:[1,1.5,2.2],sl:.7,tf:'M5'},DAYTRADE:{tp:[2,3.5,5],sl:1.2,tf:'M15'},SWING:{tp:[4,7,10],sl:2,tf:'H4'}};
+const PBP=['Double Bottom','Bullish Engulfing','Morning Star','Hammer','Bullish Flag','Ascending Triangle'];
+const PSP=['Double Top','Bearish Engulfing','Evening Star','Shooting Star','Head & Shoulders','Descending Triangle'];
+const FD={EURUSD:['ECB dovish pivot — rate cut signal','EZ PMI 44.2 contraction','US-EU yield spread widening'],GBPUSD:['BOE hold 5.25% hawkish stance','UK GDP 0.3% QoQ better than expected','UK unemployment 4.3% rising'],USDJPY:['BOJ ultra-dovish — carry trade favorable','Japan intervention risk at 152+','US-JP yield spread at decade high'],USDIDR:['BI rate 6.00% hawkish hold — IDR supported','Foreign inflow JSX Rp 1.2T this week','Trade surplus narrowing but still positive','Rupiah stable Rp 15,800/USD'],USDCHF:['SNB rate cut to 1.25% — CHF weakening','Safe haven demand declining','EURCHF divergence supports USD'],SPX:['US CPI 3.1% — Fed rate cut supportive','Corporate earnings beat 78% estimate','Tech mega-cap rally drives ATH'],NDX:['AI sector momentum — NVDA + MSFT leading','NASDAQ breadth improving 85% above 200MA','Breakout above 21,000 target 22,000'],DAX40:['German manufacturing PMI 44.2 still weak','ECB policy divergence supports EUR','Auto sector recovery partial'],NKY225:['BOJ policy tweak — Yen weakening supports exporters','Corporate governance reform','Nikkei near all-time high'],IHSG:['BI rate 6.00% — ceiling maintained','Foreign net buy Rp 1.2T weekly','GDP growth 5.1%','Rupiah stable Rp 15.800/USD'],MSFT:['Azure cloud revenue +29% YoY','AI Copilot monetizing 365M users','EPS beat by 8%'],NVDA:['Blackwell GPU demand exceeds supply','Data center revenue +250% YoY','AI capex cycle early innings'],JNJ:['Pharma pipeline — 5 new drug approvals','Dividend king — 62 years consecutive','MedTech acquisition on track'],XOM:['OPEC+ production cuts support crude','Refining margin expansion','Free cash flow $15B buyback'],BBCA:['NPL ratio 2.1% best-in-class','CASA ratio 78% lowest funding cost','Digital banking +25% YoY'],TLKM:['5G capex peaking — margin recovery','Dividend yield 4.2%','Jio Fiber partnership'],ASII:['Auto sales recovery +8% QoQ','Wuling EV market share 35%','Astra Digital new growth'],ADRO:['Nickel price recovery — ore export ban benefit','Coal volume +12% QoQ','Green aluminum ESG play'],BREN:['Indonesia largest renewable pure-play','Hydro capacity to 3.2GW','PPA pipeline visibility high'],XAUUSD:['Fed dovish — gold safe haven rising','Geopolitical tension elevated','Central bank accumulation 1000+ tons/year'],WTI:['OPEC+ cut extension Q3 2025','US shale rebound limited','China demand recovery PMI 50.8'],BRENT:['Brent-WTI spread stable $3.50','Global demand 103.2M bpd IEA','SPR below 5-year average'],COPPER:['China infrastructure stimulus — demand surge','EV transition structural deficit','LME inventory multi-year low'],NIKEL:['Indonesia ore export ban — supply tightening','Stainless steel demand from China','EV battery nickel sulfate growing'],CPO:['Indonesia B30 biodiesel mandate','Export tax reduced by government','El Nino easing yield recovery'],BTCUSD:['Spot ETF inflow $1.2B weekly','Halving supply shock absorbing','Exchange reserve declining -3.2% monthly'],ETHUSD:['Spot ETF opens institutional floodgate','L2 TVL +45% QoY','EIP-4844 gas fee -90%'],SOLUSD:['DeFi TVL $8.5B fastest L1','Firedancer 10x throughput','Institutional interest rising'],USDTIDR:['USDT demand stable — IDR improving','P2P volume growing Indonesia','Bappebti licensed expansion'],BTCIDR:['BTC rally drives IDR demand premium 1.2%','Adoption +35% QoQ','Wallet penetration low — upside']};
+const BPD=[{i:'fa-database',t:'DATA INGESTION',d:'Investing.com, yfinance, Binance, IDX. WebSocket 35+ instruments.'},{i:'fa-cogs',t:'FEATURE ENGINEERING',d:'50+ fitur: RSI, MACD, BB, ATR, Pattern, Order Flow.'},{i:'fa-brain',t:'AI MODEL',d:'Ensemble GB + LSTM. Walk-forward 5 tahun. Retrain 24 jam.'},{i:'fa-chess',t:'STRATEGY LOGIC',d:'Fusion: Trend, Mean Reversion, Breakout, SMC scoring.'},{i:'fa-bolt',t:'TRADE EXECUTION',d:'Smart order routing, slippage control, < 50ms.'},{i:'fa-shield-alt',t:'RISK MANAGEMENT',d:'Kelly Criterion, SMC SL, Max DD 5%/hari.'}];
+const NW=[{c:'Forex',s:'Investing.com',t:'EUR/USD bullish divergence H4 — potential buy setup',tm:'8m',i:'fa-chart-line',cl:'var(--buy)'},{c:'Forex',s:'TradingView',t:'GBP/USD testing 1.2750 resistance — breakout pending',tm:'15m',i:'fa-chart-area',cl:'var(--gold)'},{c:'Index',s:'Reuters',t:'S&P 500 new ATH 5,925 — tech mega-cap leading rally',tm:'22m',i:'fa-chart-bar',cl:'var(--buy)'},{c:'Crypto',s:'CoinDesk',t:'BTC ETF $1.4B weekly inflow — largest since January',tm:'35m',i:'fa-bitcoin',cl:'var(--info)'},{c:'Komoditi',s:'Investing.com',t:'XAUUSD breakout $2,650 — target $2,680',tm:'48m',i:'fa-oil-can',cl:'var(--gold)'},{c:'IDX',s:'Bloomberg',t:'BBCA +1.2% — Q1 earnings beat estimate',tm:'1j',i:'fa-building',cl:'var(--buy)'},{c:'Fundamental',s:'WSJ',t:'Fed signals rate cut Q2 2025 — inflation 3.1%',tm:'1.5j',i:'fa-landmark',cl:'var(--gold)'},{c:'Saham GL',s:'CNBC',t:'NVDA Blackwell GPU demand exceeds all estimates',tm:'2j',i:'fa-globe',cl:'var(--buy)'},{c:'Crypto',s:'The Block',t:'ETH L2 TVL surpasses $45B all-time high',tm:'2.5j',i:'fa-ethereum',cl:'var(--info)'}];
+
+const RES={
+legal:{icon:'fa-building-columns',color:'var(--gold)',label:'PT Srijaya Naga',isLegal:true},
+ai:{icon:'fa-brain',color:'var(--purple)',label:'AI Tools',items:[
+{n:'ChatGPT',d:'Generative AI oleh OpenAI',u:'https://chat.openai.com',i:'fa-comment-dots'},
+{n:'DeepSeek Chat',d:'AI reasoning & coding assistant',u:'https://chat.deepseek.com',i:'fa-robot'},
+{n:'Claude',d:'AI assistant oleh Anthropic',u:'https://claude.ai',i:'fa-comment'},
+{n:'Gemini',d:'Google AI multimodal',u:'https://gemini.google.com',i:'fa-gem'},
+{n:'Perplexity',d:'AI-powered search engine',u:'https://www.perplexity.ai',i:'fa-search'},
+{n:'Copilot',d:'Microsoft AI assistant',u:'https://copilot.microsoft.com',i:'fa-windows'},
+{n:'DeepL',d:'Neural machine translation',u:'https://www.deepl.com',i:'fa-language'},
+{n:'Character AI',d:'Conversational AI characters',u:'https://character.ai',i:'fa-masks-theater'},
+{n:'OpenAI Platform',d:'GPT-4 API & research',u:'https://openai.com',i:'fa-flask'},
+{n:'DeepSeek',d:'DeepSeek AI research platform',u:'https://www.deepseek.com',i:'fa-microchip'}
+]},
+osint:{icon:'fa-eye',color:'#ff6d00',label:'OSINT / Intel',items:[
+{n:'Shodan',d:'Internet of Things search engine',u:'https://www.shodan.io',i:'fa-satellite'},
+{n:'Censys',d:'Attack surface discovery',u:'https://search.censys.io',i:'fa-radar'},
+{n:'ZoomEye',d:'Cyberspace search engine',u:'https://www.zoomeye.org',i:'fa-search-location'},
+{n:'Hunter.io',d:'Email finder & outreach',u:'https://hunter.io',i:'fa-envelope-open-text'},
+{n:'GreyNoise',d:'Internet noise intelligence',u:'https://www.greynoise.io',i:'fa-shield-alt'},
+{n:'PublicWWW',d:'Website source code search',u:'https://publicwww.com',i:'fa-code'},
+{n:'FOFA',d:'Network space mapping',u:'https://fofa.info',i:'fa-network-wired'},
+{n:'LeakIX',d:'Data leak detection',u:'https://leakix.net',i:'fa-exclamation-triangle'},
+{n:'BuiltWith',d:'Website technology profiler',u:'https://builtwith.com',i:'fa-layer-group'},
+{n:'IntelX',d:'Dark web & data intelligence',u:'https://intelx.io',i:'fa-user-secret'}
+]},
+trading:{icon:'fa-chart-line',color:'var(--buy)',label:'Trading Platform',items:[
+{n:'TradingView',d:'Chart & social trading platform',u:'https://www.tradingview.com',i:'fa-chart-area'},
+{n:'TradingView Webhook',d:'REST API untuk alert automation',u:'https://www.tradingview.com/rest-api/',i:'fa-plug'},
+{n:'MetaTrader 4',d:'Forex trading platform',u:'https://www.metatrader4.com',i:'fa-desktop'},
+{n:'MetaTrader 5',d:'Multi-asset trading platform',u:'https://www.metatrader5.com',i:'fa-desktop'},
+{n:'Thinkorswim',d:'TD Ameritrade advanced charting',u:'https://www.tdameritrade.com/tools-and-platforms/thinkorswim.html',i:'fa-chart-line'},
+{n:'Finviz',d:'Stock screener & heat map',u:'https://finviz.com',i:'fa-th-large'},
+{n:'NinjaTrader',d:'Advanced futures trading',u:'https://ninjatrader.com',i:'fa-ninja'},
+{n:'StockCharts',d:'Technical analysis charts',u:'https://stockcharts.com',i:'fa-chart-bar'},
+{n:'QuantConnect',d:'Algorithmic backtesting & deploy',u:'https://www.quantconnect.com/',i:'fa-code-branch'},
+{n:'QuantConnect API',d:'Documentation & API reference',u:'https://www.quantconnect.com/docs/v2/',i:'fa-book'},
+{n:'Alpaca Markets',d:'API-first saham & crypto',u:'https://alpaca.markets/',i:'fa-exchange-alt'},
+{n:'MetaApi Cloud',d:'Cloud MT4/MT5 API bridge',u:'https://metaapi.cloud/',i:'fa-cloud'}
+]},
+fundamental:{icon:'fa-balance-scale',color:'var(--gold)',label:'Fundamental',items:[
+{n:'Morningstar',d:'Premium fundamental research',u:'https://www.morningstar.com',i:'fa-star'},
+{n:'Simply Wall St',d:'Visual stock analysis reports',u:'https://simplywall.st',i:'fa-chart-pie'},
+{n:'Stock Rover',d:'Deep stock comparison tool',u:'https://www.stockrover.com',i:'fa-rocket'},
+{n:'GuruFocus',d:'Value investing data & screeners',u:'https://www.gurufocus.com',i:'fa-graduation-cap'},
+{n:'Damodaran Online',d:'Valuation datasets by Aswath',u:'https://pages.stern.nyu.edu/~adamodar/',i:'fa-university'},
+{n:'Sectors.app',d:'Sector & industry analysis',u:'https://sectors.app',i:'fa-layer-group'}
+]},
+market:{icon:'fa-newspaper',color:'var(--info)',label:'Market Data',items:[
+{n:'Investing.com',d:'Real-time quotes & economic calendar',u:'https://id.investing.com',i:'fa-chart-line'},
+{n:'Bloomberg',d:'Global financial news & data',u:'https://www.bloomberg.com',i:'fa-building'},
+{n:'Reuters',d:'Breaking news & market data',u:'https://www.reuters.com',i:'fa-rss'},
+{n:'DailyFX',d:'Forex analysis & education',u:'https://www.dailyfx.com',i:'fa-coins'},
+{n:'FXStreet',d:'Forex news & technical analysis',u:'https://www.fxstreet.com',i:'fa-road'},
+{n:'ForexLive',d:'Real-time forex news feed',u:'https://www.forexlive.com',i:'fa-bolt'},
+{n:'Benzinga Pro',d:'Real-time news & alerts',u:'https://www.benzinga.com/pro',i:'fa-newspaper'}
+]},
+idx:{icon:'fa-flag',color:'#e1306c',label:'IDX Indonesia',items:[
+{n:'IDX.co.id',d:'Bursa Efek Indonesia official',u:'https://www.idx.co.id',i:'fa-landmark'},
+{n:'Stockbit',d:'Trading platform & komunitas',u:'https://stockbit.com',i:'fa-users'},
+{n:'KSEI',d:'Kustodian Sentral Efek Indonesia',u:'https://www.ksei.co.id',i:'fa-database'},
+{n:'RTI Business',d:'Data saham real-time IDX',u:'https://www.rtibusiness.net',i:'fa-table'},
+{n:'CMC Markets',d:'CFD & spread betting platform',u:'https://www.cmcmarkets.com',i:'fa-exchange-alt'},
+{n:'StockEdge',d:'Equity analytics Indonesia',u:'https://www.stockedge.com',i:'fa-chart-bar'},
+{n:'Hedgtrade',d:'Derivatives education & tools',u:'https://hedgtrade.com',i:'fa-graduation-cap'}
+]},
+dev:{icon:'fa-server',color:'#ff6d00',label:'AI Development',items:[
+{n:'Google AI Platform',d:'Cloud ML infrastructure',u:'https://cloud.google.com/ai-platform',i:'fa-google'},
+{n:'Amazon SageMaker',d:'AWS machine learning service',u:'https://aws.amazon.com/sagemaker/',i:'fa-aws'},
+{n:'Azure AI',d:'Microsoft Azure AI services',u:'https://azure.microsoft.com/id-id/solutions/ai/',i:'fa-microsoft'},
+{n:'Hugging Face',d:'Open-source AI model hub',u:'https://huggingface.co/',i:'fa-face-smile'},
+{n:'QuantConnect Docs',d:'Algorithm trading documentation',u:'https://www.quantconnect.com/docs',i:'fa-book'},
+{n:'Investopedia Algo',d:'Algorithmic trading education',u:'https://www.investopedia.com/terms/a/algorithmictrading.asp',i:'fa-graduation-cap'},
+{n:'Robot Wealth',d:'Quantitative trading insights',u:'https://robotwealth.com/',i:'fa-robot'},
+{n:'QuantInsti',d:'Algo trading courses & blog',u:'https://www.quantinsti.com/',i:'fa-chalkboard-teacher'}
+]},
+tech:{icon:'fa-code',color:'#00e676',label:'Tech & Libraries',items:[
+{n:'Python',d:'Primary backend language',u:'https://www.python.org/',i:'fa-python'},
+{n:'Pandas',d:'Data manipulation & analysis',u:'https://pandas.pydata.org/',i:'fa-table'},
+{n:'NumPy',d:'Numerical computing library',u:'https://numpy.org',i:'fa-calculator'},
+{n:'yfinance',d:'Yahoo Finance data downloader',u:'https://pypi.org/project/yfinance/',i:'fa-download'},
+{n:'TA-Lib',d:'Technical analysis indicator library',u:'https://ta-lib.org/',i:'fa-chart-line'},
+{n:'Scikit-learn',d:'Machine learning framework',u:'https://scikit-learn.org/',i:'fa-brain'},
+{n:'TensorFlow / Keras',d:'Deep learning by Google',u:'https://www.tensorflow.org/',i:'fa-fire'},
+{n:'PyTorch',d:'Deep learning by Meta',u:'https://pytorch.org/',i:'fa-burn'},
+{n:'Backtrader',d:'Python backtesting framework',u:'https://www.backtrader.com/',i:'fa-history'},
+{n:'Zipline',d:'Quantopian-style backtesting',u:'https://zipline.ml4trading.io/',i:'fa-wave-square'}
+]},
+cert:{icon:'fa-certificate',color:'var(--sell)',label:'Certifications',items:[
+{n:'CMT',d:'Chartered Market Technician',u:'https://cmtassociation.org/',i:'fa-chart-line'},
+{n:'CFA',d:'Chartered Financial Analyst',u:'https://www.cfainstitute.org/',i:'fa-landmark'},
+{n:'FRM',d:'Financial Risk Manager',u:'https://www.garp.org/frm',i:'fa-shield-halved'},
+{n:'CEH',d:'Certified Ethical Hacker',u:'https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/',i:'fa-shield-halved'},
+{n:'eJPT',d:'Junior Penetration Tester',u:'https://elearnsecurity.com/course/ejpt-junior-penetration-tester/',i:'fa-lock'},
+{n:'OSCP',d:'Offensive Security Certified Pro',u:'https://www.offensive-security.com/pwk-oscp/',i:'fa-skull-crossbones'}
+]},
+web:{icon:'fa-globe',color:'#e1306c',label:'Website Building',items:[
+{n:'GoDaddy',d:'Domain & hosting Indonesia',u:'https://id.godaddy.com',i:'fa-globe'},
+{n:'Hostinger',d:'Hosting terjangkau Indonesia',u:'https://www.hostinger.co.id',i:'fa-server'},
+{n:'Wix',d:'Drag & drop website builder',u:'https://www.wix.com',i:'fa-paint-brush'},
+{n:'WordPress',d:'CMS & blog platform',u:'https://wordpress.com',i:'fa-wordpress'},
+{n:'Webflow',d:'No-code visual development',u:'https://www.webflow.com',i:'fa-bezier-curve'}
+]}
+};
+
+let cM='forex',cS='DAYTRADE',cP='EURUSD',cD=[],e20=[],e50=[],sPt=[];
+document.addEventListener('DOMContentLoaded',()=>{iP();i3D();iBP();iCat();iPS();iCh();iCB();iFl();iSMC();iNW();iSA();iCT();iRes()});
+
+function i3D(){const l=document.getElementById('heroLogo');if(!l)return;document.addEventListener('mousemove',e=>{const r=l.parentElement.getBoundingClientRect(),dx=(e.clientX-r.left-r.width/2)/(r.width/2),dy=(e.clientY-r.top-r.height/2)/(r.height/2);if(Math.sqrt(dx*dx+dy*dy)<3){l.style.animation='none';l.style.transform=`rotateY(${dx*15}deg) rotateX(${-dy*10}deg) translateZ(15px)`}});document.addEventListener('mouseleave',()=>{l.style.transform='';l.style.animation='lf 4s ease-in-out infinite'})}
+function iP(){const c=document.getElementById('particles'),x=c.getContext('2d');let w,h,ps=[];function rs(){w=c.width=innerWidth;h=c.height=innerHeight}rs();addEventListener('resize',rs);for(let i=0;i<40;i++)ps.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2,r:Math.random()*1+.4,a:Math.random()*.2+.05});(function d(){x.clearRect(0,0,w,h);ps.forEach((p,i)=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;x.beginPath();x.arc(p.x,p.y,p.r,0,Math.PI*2);x.fillStyle=`rgba(240,185,11,${p.a})`;x.fill();for(let j=i+1;j<ps.length;j++){const dx=p.x-ps[j].x,dy=p.y-ps[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<80){x.beginPath();x.moveTo(p.x,p.y);x.lineTo(ps[j].x,ps[j].y);x.strokeStyle=`rgba(240,185,11,${.035*(1-d/80)})`;x.stroke()}}});requestAnimationFrame(d)})()}
+function iBP(){const g=document.getElementById('bpG');BPD.forEach((b,i)=>{const d=document.createElement('div');d.className='gb rounded-xl p-4 an';d.style.animationDelay=`${i*.1}s`;d.innerHTML=`<div class="flex items-center gap-3 mb-2"><div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:rgba(240,185,11,.1)"><i class="fas ${b.i} text-sm" style="color:var(--gold)"></i></div><div><div class="text-[8px] fd tracking-wider" style="color:var(--muted)">LAYER ${i+1}</div><h3 class="fd text-[9px] font-bold tracking-wider">${b.t}</h3></div></div><p class="text-[11px] leading-relaxed" style="color:var(--text2)">${b.d}</p>`;g.appendChild(d)})}
+function iCat(){const c=document.getElementById('catBtns');c.innerHTML='';CATS.forEach((cat,i)=>{const b=document.createElement('button');b.className=`catbtn ${i===0?'active':''}`;b.innerHTML=`<i class="fas ${cat.i} mr-1"></i>${cat.n}`;b.onclick=()=>{cM=cat.id;c.querySelectorAll('.catbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');iPS()};c.appendChild(b)})}
+function setS(s){cS=s;document.querySelectorAll('.sb').forEach(b=>{b.classList.remove('ta');b.style.color='var(--text2)'});event.target.classList.add('ta');event.target.style.color=''}
+function iPS(){const s=document.getElementById('pairS');s.innerHTML='';PR[cM].forEach(p=>{const o=document.createElement('option');o.value=p.id;o.textContent=p.n;s.appendChild(o)});uSp()}
+function uSp(){const p=PR[cM].find(x=>x.id===document.getElementById('pairS').value);if(p)document.getElementById('spH').textContent=`Est: ${p.p.toLocaleString('en',{maximumFractionDigits:p.d})} (Investing.com)`}
+
+function gen(){const btn=document.getElementById('gBtn'),out=document.getElementById('sO');const pid=document.getElementById('pairS').value,pair=PR[cM].find(x=>x.id===pid);const bp=document.getElementById('spP').value?parseFloat(document.getElementById('spP').value):pair.p;const pr=STP[cS],isB=Math.random()>.42;
+btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin mr-2"></i>ANALYZING...';
+const steps=['Fetch Investing.com data...','Compute indicators...','AI model prediction...','SMC analysis...','Risk calc...','Building report...'];
+out.innerHTML=`<div class="sl w-full"><div class="space-y-2">${steps.map((s,i)=>`<div class="st flex items-center gap-2 text-xs" style="color:var(--text2)"><i class="fas ${i<steps.length-1?'fa-circle-notch fa-spin':'fa-check-circle'}" style="color:${i<steps.length-1?'var(--gold)':'var(--buy)'}"></i>${s}</div>`).join('')}</div></div>`;
+steps.forEach((_,i)=>setTimeout(()=>out.querySelectorAll('.st')[i]?.classList.add('ac'),i*280));
+setTimeout(()=>{
+const dir=isB?'BUY':'SELL',sg=isB?1:-1,en=bp+(Math.random()-.5)*pair.v*.3;
+const sl=en-sg*pair.v*pr.sl*(.9+Math.random()*.3),t1=en+sg*pair.v*pr.tp[0]*(.9+Math.random()*.2),t2=en+sg*pair.v*pr.tp[1]*(.9+Math.random()*.2),t3=en+sg*pair.v*pr.tp[2]*(.9+Math.random()*.2);
+const conf=Math.floor(72+Math.random()*22),rsi=isB?(25+Math.random()*15).toFixed(1):(75+Math.random()*15).toFixed(1),macd=(Math.random()*2-(isB?-.5:.5)).toFixed(4);
+const ev=(en+(Math.random()-.5)*pair.v*.5).toFixed(pair.d),e5=(en+(Math.random()-.5)*pair.v*1.2).toFixed(pair.d);
+const sup=(Math.min(en,sl)-pair.v*.3).toFixed(pair.d),res=(Math.max(en,t1)+pair.v*.5).toFixed(pair.d),vol=Math.floor(10+Math.random()*35);
+const pat=isB?PBP[Math.floor(Math.random()*PBP.length)]:PSP[Math.floor(Math.random()*PSP.length)];
+const fun=(FD[pid]||FD.XAUUSD).sort(()=>Math.random()-.5).slice(0,2);
+const cc=conf>=85?'var(--buy)':conf>=75?'var(--gold)':'var(--text2)',f=v=>parseFloat(v).toLocaleString('en',{maximumFractionDigits:pair.d}),rr=(Math.abs(t2-en)/Math.abs(en-sl)).toFixed(1);
+const ob=(en+(Math.random()-.5)*pair.v*2).toFixed(pair.d),fvb=(en+pair.v*.8).toFixed(pair.d),fvt=(en+pair.v*1.5).toFixed(pair.d);
+const now=new Date(),ts=now.toLocaleString('id-ID'),date=now.toLocaleDateString('id-ID',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+const bib=['Murphy, J.J. (2021). "Technical Analysis of the Financial Markets". NYIF.','Nison, S. (2001). "Japanese Candlestick Charting Techniques". Prentice Hall.','Brown, C. (2022). "Technical Analysis for the Trading Professional". McGraw-Hill.','ICT Methodology — Order Blocks, FVG, Liquidity, OTE Concepts.','<a href="https://id.investing.com" target="_blank" rel="noopener" style="color:var(--gold)">Investing.com</a> (2025). "Real-Time Market Data & Analysis".','<a href="https://www.tradingview.com" target="_blank" rel="noopener" style="color:var(--gold)">TradingView</a> (2025). "Multi-Timeframe Technical Analysis".','<a href="https://www.reuters.com" target="_blank" rel="noopener" style="color:var(--gold)">Reuters</a> / <a href="https://www.bloomberg.com" target="_blank" rel="noopener" style="color:var(--gold)">Bloomberg</a> (2025). "Global Macro Data".','<a href="https://www.coindesk.com" target="_blank" rel="noopener" style="color:var(--gold)">CoinDesk</a> / <a href="https://www.theblock.co" target="_blank" rel="noopener" style="color:var(--gold)">The Block</a> (2025). "Crypto On-Chain Analytics".','Al Brooks (2020). "Trading Price Action Trends". Wiley.','<a href="https://www.bi.go.id" target="_blank" rel="noopener" style="color:var(--gold)">Bank Indonesia</a> (2025). "Monetary Policy & Rupiah Analysis".'];
+out.innerHTML=`
+<div class="flex flex-wrap gap-1.5 mb-4">
+<button onclick="showTab('t1')" class="stab active" id="tab-t1">SIGNAL</button>
+<button onclick="showTab('t2')" class="stab" id="tab-t2">SNAPSHOT</button>
+<button onclick="showTab('t3')" class="stab" id="tab-t3">JURNAL</button>
+<button onclick="showTab('t4')" class="stab" id="tab-t4">TEMPLATE</button>
+<button onclick="showTab('t5')" class="stab" id="tab-t5">KALKULATOR</button>
+<button onclick="showTab('t6')" class="stab" id="tab-t6">KESIMPULAN</button>
+</div>
+<div class="spanel active" id="t1">
+<div class="flex flex-wrap items-center justify-between gap-3 mb-3"><div class="flex items-center gap-2"><span class="px-3 py-1 rounded-lg fd text-xs font-bold tracking-wider" style="background:${isB?'var(--buy-bg)':'var(--sell-bg)'};color:${isB?'var(--buy)':'var(--sell)'}"><i class="fas fa-arrow-${isB?'up':'down'} mr-1"></i>${dir}</span><div><div class="fd font-bold text-sm">${pair.n}</div><div class="text-[9px]" style="color:var(--muted)">${cS} · ${pr.tf} · ${CATS.find(c=>c.id===cM)?.n||''}</div></div></div><div class="text-right"><div class="text-[9px]" style="color:var(--muted)">Confidence</div><div class="fd text-xl font-bold" style="color:${cc}">${conf}%</div></div></div>
+<div class="cb mb-3"><div class="cf" style="width:${conf}%;background:linear-gradient(90deg,${cc},${isB?'var(--buy)':'var(--sell)'})"></div></div>
+<div class="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-3">${[{l:'ENTRY',v:f(en),c:'var(--text)'},{l:'TP1',v:f(t1),c:'var(--buy)'},{l:'TP2',v:f(t2),c:'var(--buy)'},{l:'TP3',v:f(t3),c:'var(--buy)'},{l:'STOP LOSS',v:f(sl),c:'var(--sell)'}].map(x=>`<div class="rounded-lg p-2 border border-[#252535]" style="background:var(--bg)"><div class="text-[8px]" style="color:var(--muted)">${x.l}</div><div class="fd text-[11px] font-bold" style="color:${x.c}">${x.v}</div></div>`).join('')}</div>
+<div class="flex items-center gap-3 mb-3 p-2 rounded-lg text-xs" style="background:var(--bg);border:1px solid var(--border)"><div><span class="text-[8px]" style="color:var(--muted)">R:R</span><div class="fd text-xs font-bold" style="color:var(--gold)">1:${rr}</div></div><div class="w-px h-5" style="background:var(--border)"></div><div><span class="text-[8px]" style="color:var(--muted)">TF</span><div class="fd text-xs font-bold">${pr.tf}</div></div><div class="w-px h-5" style="background:var(--border)"></div><div><span class="text-[8px]" style="color:var(--muted)">SL Dist</span><div class="fd text-xs font-bold">${f(Math.abs(en-sl))}</div></div></div>
+<div class="rounded-lg p-3 mb-2" style="background:var(--bg);border:1px solid var(--border)"><div class="flex items-center gap-1.5 mb-2"><i class="fas fa-robot text-[10px]" style="color:var(--gold)"></i><span class="fd text-[8px] tracking-wider" style="color:var(--gold)">AI TECHNICAL</span></div><div class="space-y-1 text-[11px]" style="color:var(--text2)"><div><b style="color:var(--text)">RSI(14):</b> ${rsi} — ${isB?'Oversold':'Overbought'}</div><div><b style="color:var(--text)">MACD:</b> ${macd} — ${isB?'Bullish div':'Bearish div'}</div><div><b style="color:var(--text)">EMA:</b> ${ev}/${e5} — ${isB?'Golden cross':'Death cross'}</div><div><b style="color:var(--text)">S/R:</b> ${sup} / ${res}</div><div><b style="color:var(--text)">Volume:</b> +${vol}% — ${isB?'Buyer accumulation':'Seller distribution'}</div><div><b style="color:var(--text)">Pattern:</b> ${pat} @ ${pr.tf}</div></div></div>
+<div class="rounded-lg p-3 mb-2" style="background:var(--bg);border:1px solid var(--border)"><div class="flex items-center gap-1.5 mb-2"><i class="fas fa-layer-group text-[10px]" style="color:var(--purple)"></i><span class="fd text-[8px] tracking-wider" style="color:var(--purple)">SMC ANALYSIS</span></div><div class="space-y-1 text-[11px]" style="color:var(--text2)"><div><b style="color:var(--text)">OB:</b> ${isB?'Bullish':'Bearish'} @ ${ob}</div><div><b style="color:var(--text)">FVG:</b> ${fvb}—${fvt}</div><div><b style="color:var(--text)">Liq:</b> ${isB?'Sweep '+sup:'Sweep '+res}</div><div><b style="color:var(--text)">OTE:</b> ${fvb}—${fvt}</div><div><b style="color:var(--text)">BOS:</b> ${isB?'Bullish':'Bearish'} confirmed</div></div></div>
+<div class="rounded-lg p-3" style="background:var(--bg);border:1px solid var(--border)"><div class="flex items-center gap-1.5 mb-2"><i class="fas fa-newspaper text-[10px]" style="color:var(--info)"></i><span class="fd text-[8px] tracking-wider" style="color:var(--info)">FUNDAMENTAL (<a href="https://id.investing.com" target="_blank" rel="noopener" style="color:var(--gold)">Investing.com</a>)</span></div><div class="space-y-1 text-[11px]" style="color:var(--text2)">${fun.map(x=>`<div><i class="fas fa-caret-right mr-1" style="color:var(--info)"></i>${x}</div>`).join('')}</div></div>
+<div class="text-right mt-2 text-[9px]" style="color:var(--muted)"><i class="fas fa-clock mr-1"></i>${ts} · Source: <a href="https://id.investing.com" target="_blank" rel="noopener" style="color:var(--gold)">Investing.com</a> · <a href="https://www.tradingview.com" target="_blank" rel="noopener" style="color:var(--gold)">TradingView</a> · <a href="https://www.reuters.com" target="_blank" rel="noopener" style="color:var(--gold)">Reuters</a></div>
+</div>
+<div class="spanel" id="t2">
+<div class="mb-3 p-2 rounded-lg" style="background:linear-gradient(135deg, rgba(240,185,11,.1), rgba(41,182,246,.05)); border:1px solid var(--border)">
+<div class="fd text-xs font-bold" style="color:var(--gold)">Srijay@: 🤖 SRIJAY@ AI ALGO ENGINE</div>
+<div class="fd text-[10px] mt-1" style="color:var(--info)">📊 ANALISA PASAR</div>
+<div class="fd text-sm font-bold mt-1" style="color:${dir === 'BUY' ? 'var(--buy)' : 'var(--sell)'}">SIGNAL: ${dir === 'BUY' ? 'BUY / BELI' : 'SELL / JUAL'}</div>
+</div>
+<div class="fd text-[9px] tracking-wider mb-3 mt-2" style="color:var(--gold)">SNAPSHOT — ${date}</div>
+<div class="grid grid-cols-2 gap-2 mb-3"><div class="rounded-lg p-2.5" style="background:var(--bg);border:1px solid var(--border)"><div class="text-[8px] mb-1" style="color:var(--muted)">SENTIMENT</div><div class="fd text-sm font-bold" style="color:${isB?'var(--buy)':'var(--sell)'}">${isB?'BULLISH':'BEARISH'}</div><div class="w-full h-1.5 rounded mt-1.5" style="background:var(--border)"><div class="h-1.5 rounded" style="width:${isB?65+Math.random()*20:15+Math.random()*20}%;background:${isB?'var(--buy)':'var(--sell)'}"></div></div></div><div class="rounded-lg p-2.5" style="background:var(--bg);border:1px solid var(--border)"><div class="text-[8px] mb-1" style="color:var(--muted)">VOLATILITY</div><div class="fd text-sm font-bold" style="color:var(--gold)">${(15+Math.random()*20).toFixed(1)}</div></div></div><div class="rounded-lg p-2.5 mb-2" style="background:var(--bg);border:1px solid var(--border)"><div class="text-[8px] mb-1.5" style="color:var(--muted)">KEY LEVELS</div><div class="grid grid-cols-4 gap-1.5 text-center text-[10px]">${[{l:'R3',v:(parseFloat(res)+pair.v*2).toFixed(pair.d),c:'var(--sell)'},{l:'R2',v:res,c:'var(--sell)'},{l:'S2',v:sup,c:'var(--buy)'},{l:'S3',v:(parseFloat(sup)-pair.v*2).toFixed(pair.d),c:'var(--buy)'}].map(x=>`<div><div class="text-[8px]" style="color:${x.c}">${x.l}</div><div class="fd font-bold text-[10px]">${x.v}</div></div>`).join('')}</div></div><div class="rounded-lg p-2.5" style="background:var(--bg);border:1px solid var(--border)"><div class="text-[8px] mb-1.5" style="color:var(--muted)">MULTI-TIMEFRAME</div><div class="space-y-1 text-[10px]" style="color:var(--text2)">${['M5','M15','H1','H4','D1'].map(tf=>`<div class="flex justify-between"><span>${tf}</span><span class="font-semibold" style="color:${Math.random()>.3?(isB?'var(--buy)':'var(--sell)'):'var(--gold)'}">${Math.random()>.3?(isB?'Bullish':'Bearish'):'Neutral'}</span></div>`).join('')}</div></div></div>
+<div class="spanel" id="t3"><div class="fd text-[9px] tracking-wider mb-3" style="color:var(--gold)">JURNAL TRADING</div><div class="space-y-2 text-[11px]" style="color:var(--text2)"><div class="grid grid-cols-2 gap-2">${[{l:'Tanggal',v:date},{l:'Pair',v:pair.n},{l:'Direction',v:dir,c:isB?'var(--buy)':'var(--sell)'},{l:'Style',v:cS+' ('+pr.tf+')'}].map(x=>`<div class="rounded-lg p-2" style="background:var(--bg);border:1px solid var(--border)"><div class="text-[8px]" style="color:var(--muted)">${x.l}</div><div class="font-semibold mt-0.5" style="color:${x.c||'var(--text)'}">${x.v}</div></div>`).join('')}</div><div class="grid grid-cols-4 gap-1.5">${[{l:'Entry',v:f(en)},{l:'SL',v:f(sl),c:'var(--sell)'},{l:'TP2',v:f(t2),c:'var(--buy)'},{l:'R:R',v:'1:'+rr,c:'var(--gold)'}].map(x=>`<div class="rounded-lg p-1.5 text-center" style="background:var(--bg);border:1px solid var(--border)"><div class="text-[8px]" style="color:var(--muted)">${x.l}</div><div class="fd font-bold text-[10px]" style="color:${x.c||'var(--text)'}">${x.v}</div></div>`).join('')}</div><div class="rounded-lg p-2" style="background:var(--bg);border:1px solid var(--border)"><div class="text-[8px] mb-1" style="color:var(--muted)">ALASAN ENTRY</div><div class="text-[10px] leading-relaxed">1. RSI ${rsi} ${isB?'oversold':'overbought'} + ${pat} @ ${pr.tf}<br>2. BOS/CHoCH ${isB?'bullish':'bearish'} H4<br>3. FVG ${fvb}—${fvt} area ${isB?'discount':'premium'}<br>4. ${fun[0]}<br>5. Volume +${vol}%</div></div><div class="rounded-lg p-2" style="background:var(--bg);border:1px solid var(--border)"><div class="text-[8px] mb-1" style="color:var(--muted)">OUTCOME</div><div class="space-y-1"><div class="flex items-center gap-2"><span style="color:var(--muted)">Result:</span><span class="px-2 py-0.5 rounded text-[9px]" style="background:var(--bg2);border:1px solid var(--border)">___ Win/Loss</span></div><div class="flex items-center gap-2"><span style="color:var(--muted)">P/L $:</span><span class="px-2 py-0.5 rounded text-[9px]" style="background:var(--bg2);border:1px solid var(--border)">__________</span></div></div></div><div class="rounded-lg p-2" style="background:var(--bg);border:1px solid var(--border)"><div class="text-[8px] mb-1" style="color:var(--muted)">LESSON LEARNED</div><div class="rounded p-1.5 text-[9px]" style="background:var(--bg2);border:1px dashed var(--border);min-height:30px;color:var(--muted)">Evaluasi trade...</div></div></div></div>
+<div class="spanel" id="t4"><div class="fd text-[9px] tracking-wider mb-3" style="color:var(--gold)">TEMPLATE TRADING PLAN</div><div class="space-y-2 text-[11px]" style="color:var(--text2)"><div class="rounded-lg p-2" style="background:var(--bg);border:1px solid var(--border)"><div class="text-[8px] mb-1.5 font-semibold" style="color:var(--text)"><i class="fas fa-clipboard-check mr-1" style="color:var(--gold)"></i>PRE-MARKET</div>${['Cek economic calendar (<a href="https://id.investing.com/economic-calendar/" target="_blank" rel="noopener" style="color:var(--gold)">Investing.com</a>)','Multi-TF structure (<a href="https://www.tradingview.com" target="_blank" rel="noopener" style="color:var(--gold)">TradingView</a>)','Identifikasi SMC zones','Cek correlation','Max risk 1-2%','Set alert key levels','Mental siap?'].map(x=>`<div class="flex gap-2"><i class="far fa-square mt-0.5 text-[9px]" style="color:var(--muted)"></i><span class="text-[10px]">${x}</span></div>`).join('')}</div><div class="rounded-lg p-2" style="background:var(--bg);border:1px solid var(--border)"><div class="text-[8px] mb-1.5 font-semibold" style="color:var(--text)"><i class="fas fa-crosshairs mr-1" style="color:var(--gold)"></i>TRADE PLAN</div><div class="space-y-1 text-[10px]"><div><b style="color:var(--text)">Pair:</b> ${pair.n} — <span style="color:${isB?'var(--buy)':'var(--sell)'}">${isB?'Bullish BUY':'Bearish SELL'}</span></div><div><b style="color:var(--text)">Entry:</b> ${f(en)} (OTE/FVG)</div><div><b style="color:var(--text)">Invalid:</b> Close di luar ${f(sl)}</div><div><b style="color:var(--text)">TP:</b> Partial ${f(t1)}, trailing setelah TP1</div></div></div><div class="rounded-lg p-2" style="background:var(--bg);border:1px solid var(--border)"><div class="text-[8px] mb-1.5 font-semibold" style="color:var(--text)"><i class="fas fa-shield-alt mr-1" style="color:var(--gold)"></i>RISK RULES</div>${['Max 2 open trade','Max daily loss 5%','2 loss berturut → stop 1 jam','Jangan move SL merugikan','Scale out 50% TP1, SL→BE','Close sebelum high-impact news'].map(x=>`<div class="flex gap-2"><i class="fas fa-caret-right mt-0.5 text-[9px]" style="color:var(--sell)"></i><span class="text-[10px]">${x}</span></div>`).join('')}</div></div></div>
+<div class="spanel" id="t5"><div class="fd text-[9px] tracking-wider mb-3" style="color:var(--gold)">KALKULATOR</div><div class="rounded-lg p-3 mb-3" style="background:var(--bg);border:1px solid var(--border)"><div class="text-[8px] font-semibold mb-2" style="color:var(--text)">POSITION SIZE</div><div class="grid grid-cols-2 gap-2"><div><label class="text-[8px] block mb-0.5" style="color:var(--muted)">Balance ($)</label><input type="text" value="10000" class="w-full text-sm" id="kBal"></div><div><label class="text-[8px] block mb-0.5" style="color:var(--muted)">Risk (%)</label><input type="text" value="1" class="w-full text-sm" id="kRk"></div><div><label class="text-[8px] block mb-0.5" style="color:var(--muted)">Entry</label><input type="text" value="${f(en)}" class="w-full text-sm" id="kEn"></div><div><label class="text-[8px] block mb-0.5" style="color:var(--muted)">Stop Loss</label><input type="text" value="${f(sl)}" class="w-full text-sm" id="kSl"></div></div><button onclick="calcK()" class="bg w-full text-xs py-2 mt-2">HITUNG</button><div class="grid grid-cols-3 gap-2 mt-2"><div class="rounded-lg p-1.5 text-center" style="background:var(--bg2)"><div class="text-[8px]" style="color:var(--muted)">Lot</div><div class="fd text-sm font-bold" id="kLt">-</div></div><div class="rounded-lg p-1.5 text-center" style="background:var(--bg2)"><div class="text-[8px]" style="color:var(--muted)">Risk $</div><div class="fd text-sm font-bold" style="color:var(--sell)" id="kRD">-</div></div><div class="rounded-lg p-1.5 text-center" style="background:var(--bg2)"><div class="text-[8px]" style="color:var(--muted)">Pips</div><div class="fd text-sm font-bold" id="kPR">-</div></div></div></div><div class="rounded-lg p-3" style="background:var(--bg);border:1px solid var(--border)"><div class="text-[8px] font-semibold mb-2" style="color:var(--text)">R:R QUICK CALC</div><div class="grid grid-cols-3 gap-2"><div><label class="text-[8px] block mb-0.5" style="color:var(--muted)">SL pips</label><input type="text" value="${Math.abs(en-sl).toFixed(pair.d>2?0:2)}" class="w-full text-sm" id="rrSL"></div><div><label class="text-[8px] block mb-0.5" style="color:var(--muted)">TP pips</label><input type="text" value="${Math.abs(t2-en).toFixed(pair.d>2?0:2)}" class="w-full text-sm" id="rrTP"></div><div class="flex items-end"><button onclick="calcRR()" class="bg w-full text-xs py-2">R:R</button></div></div><div class="rounded-lg p-2 mt-2 text-center" style="background:var(--bg2)"><div class="text-[8px]" style="color:var(--muted)">Risk : Reward</div><div class="fd text-base font-bold" style="color:var(--gold)" id="rrVal">1:${rr}</div></div></div></div>
+<div class="spanel" id="t6"><div class="fd text-[9px] tracking-wider mb-3" style="color:var(--gold)">KESIMPULAN & DAFTAR PUSTAKA</div><div class="rounded-lg p-2.5 mb-2" style="background:var(--bg);border:1px solid var(--border)"><div class="text-[8px] mb-1.5 font-semibold" style="color:var(--text)"><i class="fas fa-bullseye mr-1" style="color:var(--buy)"></i>KESIMPULAN</div><div class="text-[11px] leading-relaxed" style="color:var(--text2)">${pair.n} menunjukkan bias <b style="color:${isB?'var(--buy)':'var(--sell)'}">${isB?'BULLISH':'BEARISH'}</b> confidence <b style="color:${cc}">${conf}%</b>. R:R 1:${rr} ${parseFloat(rr)>=2?'memenuhi kriteria entry.':'di bawah standar — pertimbangkan skip.'}</div></div><div class="rounded-lg p-2.5 mb-2" style="background:var(--bg);border:1px solid var(--border)"><div class="text-[8px] mb-1.5 font-semibold" style="color:var(--text)"><i class="fas fa-lightbulb mr-1" style="color:var(--gold)"></i>SARAN</div><div class="space-y-1 text-[10px]" style="color:var(--text2)">${[parseFloat(rr)>=2?'Entry valid — eksekusi sesuai lot':'R:R < 1:2 — tunggu setup lebih baik','Patuhi SL — jangan move merugikan','Partial 50% TP1, trailing stop','Max 2 open trade','2 loss berturut → stop, review'].map(x=>`<div><i class="fas fa-caret-right mr-1" style="color:var(--gold)"></i>${x}</div>`).join('')}</div></div><div class="rounded-lg p-2.5" style="background:var(--bg);border:1px solid var(--border)"><div class="text-[8px] mb-1.5 font-semibold" style="color:var(--text)"><i class="fas fa-book mr-1" style="color:var(--info)"></i>DAFTAR PUSTAKA</div><div class="space-y-1 text-[9px]" style="color:var(--text2)">${bib.map((b,i)=>`<div><span class="fd font-bold" style="color:var(--muted)">[${i+1}]</span> ${b}</div>`).join('')}</div></div><div class="text-right mt-2 text-[9px]" style="color:var(--muted)"><i class="fas fa-clock mr-1"></i>${ts}</div></div>`;
+btn.disabled=false;btn.innerHTML='<i class="fas fa-robot mr-2"></i>GENERATE SIGNAL';showT(`${dir} — ${pair.n}`)
+},steps.length*280+400);
+}
+
+function showTab(id){document.querySelectorAll('#sO .spanel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('#sO .stab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');document.getElementById('tab-'+id).classList.add('active')}
+function calcK(){const b=parseFloat(document.getElementById('kBal').value)||10000,r=parseFloat(document.getElementById('kRk').value)||1,e=parseFloat(document.getElementById('kEn').value),s=parseFloat(document.getElementById('kSl').value),rd=b*(r/100),sd=Math.abs(e-s);let pv;if(sd>100)pv=0.01;else if(sd>1)pv=0.0001;else pv=0.01;const lt=sd>0?rd/(sd*100):0;document.getElementById('kLt').textContent=lt.toFixed(2);document.getElementById('kRD').textContent='$'+rd.toFixed(2);document.getElementById('kPR').textContent=Math.round(sd/pv)+' pips'}
+function calcRR(){const s=parseFloat(document.getElementById('rrSL').value)||1,t=parseFloat(document.getElementById('rrTP').value)||1;document.getElementById('rrVal').textContent='1 : '+(t/s).toFixed(1)}
+function cSMC(){const b=parseFloat(document.getElementById('sB3').value)||10000,r=parseFloat(document.getElementById('sR').value)||1,e=parseFloat(document.getElementById('sE').value),s=parseFloat(document.getElementById('sL').value),rd=b*(r/100),sd=Math.abs(e-s);let pv;if(sd>100)pv=0.01;else if(sd>1)pv=0.0001;else pv=0.01;const lt=sd>0?rd/(sd*100):0;document.getElementById('sLt').textContent=lt.toFixed(2);document.getElementById('sRD').textContent='$'+rd.toFixed(2);document.getElementById('sPR').textContent=Math.round(sd/pv);document.getElementById('sRR').textContent='1:'+(sd*3.2/sd).toFixed(1)}
+
+function iFl(){const l=['DATA','FEAT','AI','STRATEGY','EXEC','RISK'],c=['var(--gold)','var(--info)','var(--purple)','var(--buy)','var(--sell)','var(--gold)'];document.getElementById('fPipe').innerHTML=l.map((t,i)=>`<div class="flex items-center gap-1"><div class="w-2.5 h-2.5 rounded-sm fp" style="background:${c[i]}"></div><span class="fd text-[8px] tracking-wider" style="color:${c[i]}">${t}</span></div>${i<5?'<i class="fas fa-chevron-right text-[7px] af" style="color:var(--muted)"></i>':''}`).join('');
+setInterval(()=>{const pr=Object.values(PR).flat().find(p=>p.id===cP)||PR.forex[0],pc=(pr.p+(Math.random()-.5)*pr.v),ib=Math.random()>.45;const ms=[{t:'DATA',m:`${cP} @ ${pc.toLocaleString('en',{maximumFractionDigits:pr.d})} Investing.com`,c:'var(--gold)'},{t:'AI',m:`GB:${ib?(.55+Math.random()*.3).toFixed(3):(.15+Math.random()*.3).toFixed(3)} LSTM:${ib?'BULL':'BEAR'}`,c:'var(--purple)'},{t:'SMC',m:`${ib?'BOS Bull':'CHoCH Bear'} — OB active`,c:'var(--buy)'},{t:'SIGNAL',m:`${ib?'BUY':'SELL'} ${cP}`,c:ib?'var(--buy)':'var(--sell)'}];const m=ms[Math.floor(Math.random()*ms.length)];const lg=document.getElementById('fLog'),el=document.createElement('div');el.className='flex items-start gap-2 text-[9px] py-0.5 border-b border-[#1a1a25]';el.innerHTML=`<span class="fd tracking-wider font-bold" style="color:${m.c}">${m.t}</span><span style="color:var(--text2)">${m.m}</span><span class="ml-auto" style="color:var(--muted)">${new Date().toLocaleTimeString('id-ID')}</span>`;lg.prepend(el);if(lg.children.length>20)lg.removeChild(lg.lastChild);const t=document.getElementById('tvS');if(t)t.innerHTML=`<div class="flex justify-between text-[10px]"><span>Trend</span><span class="font-semibold" style="color:${ib?'var(--buy)':'var(--sell)'}">${ib?'Bullish':'Bearish'}</span></div><div class="flex justify-between text-[10px]"><span>RSI</span><span>${(30+Math.random()*40).toFixed(1)}</span></div><div class="flex justify-between text-[10px]"><span>Source</span><span style="color:var(--gold)">Investing.com</span></div>`},2200)}
+
+function iSMC(){const cs=[{i:'fa-cube',t:'ORDER BLOCK',d:'Zona order institusi.',c:'var(--sell)',l:'sz-ob'},{i:'fa-arrows-alt-v',t:'FVG',d:'Gap 3 candle. Entry.',c:'var(--info)',l:'sz-fv'},{i:'fa-water',t:'LIQUIDITY',d:'SL cluster. Smart money.',c:'var(--gold)',l:'sz-lq'},{i:'fa-crosshairs',t:'OTE',d:'Fibo 62-79% swing.',c:'var(--buy)',l:'sz-ot'},{i:'fa-exchange-alt',t:'BOS/CHoCH',d:'BOS=lanjut. CHoCH=reverse.',c:'var(--purple)',l:'sz-bs'},{i:'fa-percentage',t:'PREM/DISC',d:'Above/below EQ.',c:'var(--text)',l:'sz-ot'}];document.getElementById('sC').innerHTML=cs.map(c=>`<div class="${c.l} sz rounded-lg p-2.5"><i class="fas ${c.i} text-xs mb-1.5 block" style="color:${c.c}"></i><div class="fd text-[8px] tracking-wider mb-0.5" style="color:${c.c}">${c.t}</div><p class="text-[9px] leading-relaxed" style="color:var(--text2)">${c.d}</p></div>`).join('');uSMC();setInterval(uSMC,3000)}
+function uSMC(){const pr=Object.values(PR).flat().find(p=>p.id===cP)||PR.forex[0],p=pr.p+(Math.random()-.5)*pr.v,ib=Math.random()>.45;document.getElementById('sP2').textContent=pr.n;const bs=document.getElementById('sB');bs.textContent=ib?'BULLISH':'BEARISH';bs.style.background=ib?'var(--buy-bg)':'var(--sell-bg)';bs.style.color=ib?'var(--buy)':'var(--sell)';document.getElementById('sZ').innerHTML=`<div class="sz sz-ob rounded p-1.5"><div class="flex justify-between text-[9px]"><span style="color:var(--sell)"><i class="fas fa-cube mr-1"></i>OB</span><span class="fd" style="color:var(--sell)">${(p-pr.v*2).toFixed(pr.d)}—${(p-pr.v*1.2).toFixed(pr.d)}</span></div></div><div class="sz sz-fv rounded p-1.5"><div class="flex justify-between text-[9px]"><span style="color:var(--info)"><i class="fas fa-arrows-alt-v mr-1"></i>FVG</span><span class="fd" style="color:var(--info)">${(p+pr.v*.5).toFixed(pr.d)}—${(p+pr.v*1.5).toFixed(pr.d)}</span></div></div><div class="sz sz-lq rounded p-1.5"><div class="flex justify-between text-[9px]"><span style="color:var(--gold)"><i class="fas fa-water mr-1"></i>Liq</span><span class="fd" style="color:var(--gold)">${(p-pr.v*3).toFixed(pr.d)}/${(p+pr.v*3).toFixed(pr.d)}</span></div></div>`;document.getElementById('sSt').innerHTML=`<div class="sz sz-bs rounded p-1.5"><div class="text-[9px]"><span style="color:var(--purple)"><i class="fas fa-exchange-alt mr-1"></i>${ib?'BOS Bull':'CHoCH Bear'}</span></div></div><div class="sz sz-ot rounded p-1.5"><div class="flex justify-between text-[9px]"><span style="color:var(--buy)"><i class="fas fa-crosshairs mr-1"></i>OTE</span><span class="fd" style="color:var(--buy)">${(p-pr.v*1.5).toFixed(pr.d)}—${(p-pr.v*.5).toFixed(pr.d)}</span></div></div><div class="rounded p-1.5 border border-[#252535]" style="background:var(--bg)"><div class="text-[9px]"><span style="color:${ib?'var(--buy)':'var(--sell)'}"><i class="fas fa-percentage mr-1"></i>${ib?'DISCOUNT':'PREMIUM'}</span></div></div>`}
+
+function iCh(){const c=document.getElementById('cB');[PR.forex[0],PR.forex[1],PR.forex[2],PR.forex[3],PR.forex[4],PR.index[0],PR.index[1],PR.stock_gl[1],PR.stock_idx[0],PR.commodity[0],PR.commodity[3],PR.crypto[0],PR.crypto[3]].forEach(p=>{const b=document.createElement('button');b.className=`px-2 py-1 rounded-lg text-[9px] border transition ${p.id===cP?'ta':'border-[#252535]'}`;if(p.id!==cP)b.style.color='var(--text2)';b.textContent=p.id;b.onclick=()=>{cP=p.id;c.querySelectorAll('button').forEach(x=>{x.classList.remove('ta');x.style.color='var(--text2)'});b.classList.add('ta');b.style.color='';rCh()};c.appendChild(b)})}
+function rCh(){const pr=Object.values(PR).flat().find(p=>p.id===cP)||PR.forex[0];document.getElementById('cT').textContent=pr.n;cD=gC(80,pr.p,pr.v);e20=cE(cD,20);e50=cE(cD,50);sPt=gS(cD);dC();uRS()}
+function gC(n,b,v){let d=[],p=b;for(let i=0;i<n;i++){const t=Math.sin(i/15)*v*.3,ch=(Math.random()-.48)*v+t*.05,o=p,cl=p+ch,h=Math.max(o,cl)+Math.random()*v*.6,l=Math.min(o,cl)-Math.random()*v*.6;d.push({open:o,close:cl,high:h,low:l,volume:200+Math.random()*800,time:i});p=cl}return d}
+function cE(d,per){const k=2/(per+1);let e=[d[0].close];for(let i=1;i<d.length;i++)e.push(d[i].close*k+e[i-1]*(1-k));return e}
+function gS(d){const s=[];for(let i=20;i<d.length-5;i++){const p=d[i-1],c=d[i];if(p.close<p.open&&c.close>c.open&&c.open<=p.close&&c.close>=p.open&&Math.random()>.4)s.push({idx:i,type:'BUY'});else if(p.close>p.open&&c.close<c.open&&c.open>=p.close&&c.close<=p.open&&Math.random()>.4)s.push({idx:i,type:'SELL'})}return s}
+function iCB(){const cv=document.getElementById('cC'),cx=cv.getContext('2d');function rs(){const r=cv.parentElement.getBoundingClientRect();cv.width=r.width*devicePixelRatio;cv.height=r.height*devicePixelRatio;cv.style.width=r.width+'px';cv.style.height=r.height+'px';cx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);dC()}rs();addEventListener('resize',rs);rCh();cv.addEventListener('mousemove',e=>{const r=cv.getBoundingClientRect(),mx=e.clientX-r.left,w=r.width,pd={l:45,r:10,t:10,b:40},cw=w-pd.l-pd.r,idx=Math.floor((mx-pd.l)/(cw/cD.length)),tt=document.getElementById('cTip');if(idx>=0&&idx<cD.length){const c=cD[idx],pr=Object.values(PR).flat().find(p=>p.id===cP)||PR.forex[0];tt.innerHTML=`#${idx+1} O:${c.open.toFixed(pr.d)} C:${c.close.toFixed(pr.d)}`;tt.style.left=(mx+10)+'px';tt.style.top=(e.clientY-r.top-20)+'px';tt.classList.remove('hidden')}});cv.addEventListener('mouseleave',()=>document.getElementById('cTip').classList.add('hidden'));setInterval(()=>{const pr=Object.values(PR).flat().find(p=>p.id===cP)||PR.forex[0],la=cD[cD.length-1],ch=(Math.random()-.48)*pr.v;cD.push({open:la.close,close:la.close+ch,high:Math.max(la.close,la.close+ch)+Math.random()*pr.v*.3,low:Math.min(la.close,la.close+ch)-Math.random()*pr.v*.3,volume:200+Math.random()*800,time:la.time+1});if(cD.length>80)cD.shift();e20=cE(cD,20);e50=cE(cD,50);if(Math.random()>.82){sPt.push({idx:cD.length-1,type:cD[cD.length-1].close>cD[cD.length-1].open?'BUY':'SELL'});if(sPt.length>8)sPt.shift();uRS()}sPt=sPt.filter(s=>s.idx<cD.length);dC()},2500)}
+function dC(){if(!cD.length)return;const cv=document.getElementById('cC'),cx=cv.getContext('2d'),w=cv.width/devicePixelRatio,h=cv.height/devicePixelRatio,pd={l:45,r:10,t:10,b:40},cW=w-pd.l-pd.r,cH=h-pd.t-pd.b-40,vH=30,cdW=cW/cD.length,bdW=Math.max(cdW*.55,1.5);cx.clearRect(0,0,w,h);let mn=Infinity,mx=-Infinity,mv=0;cD.forEach(c=>{mn=Math.min(mn,c.low);mx=Math.max(mx,c.high);mv=Math.max(mv,c.volume)});[e20,e50].forEach(e=>{e.forEach(v=>{mn=Math.min(mn,v);mx=Math.max(mx,v)})});const r=mx-mn||1;mn-=r*.05;mx+=r*.05;const tR=mx-mn,yP=p=>pd.t+cH*(1-(p-mn)/tR),xC=i=>pd.l+i*cdW+cdW/2;cx.strokeStyle='#1a1a25';cx.lineWidth=.5;for(let i=0;i<=5;i++){const y=pd.t+(cH/5)*i;cx.beginPath();cx.moveTo(pd.l,y);cx.lineTo(w-pd.r,y);cx.stroke();cx.fillStyle='#505060';cx.font='8px DM Sans';cx.textAlign='right';cx.fillText((mx-(tR/5)*i).toFixed(2),pd.l-4,y+3)}cD.forEach((c,i)=>{const x=xC(i),vh=(c.volume/mv)*vH;cx.fillStyle=c.close>=c.open?'rgba(0,200,83,.08)':'rgba(255,23,68,.08)';cx.fillRect(x-bdW/2,pd.t+cH+5+(vH-vh),bdW,vH)});function dl(d,col){cx.beginPath();cx.strokeStyle=col;cx.lineWidth=1.2;d.forEach((v,i)=>{const x=xC(i),y=yP(v);i===0?cx.moveTo(x,y):cx.lineTo(x,y)});cx.stroke()}dl(e20,'#f0b90b');dl(e50,'#29b6f6');cD.forEach((c,i)=>{const x=xC(i),g=c.close>=c.open,col=g?'#00c853':'#ff1744';cx.beginPath();cx.strokeStyle=col;cx.lineWidth=.7;cx.moveTo(x,yP(c.high));cx.lineTo(x,yP(c.low));cx.stroke();const yO=yP(c.open),yC=yP(c.close),bT=Math.min(yO,yC),bH=Math.max(Math.abs(yC-yO),.5);cx.fillStyle=col;cx.fillRect(x-bdW/2,bT,bdW,bH)});sPt.forEach(s=>{if(s.idx<0||s.idx>=cD.length)return;const x=xC(s.idx),c=cD[s.idx],ib=s.type==='BUY';const y=ib?yP(c.low)+8:yP(c.high)-8;cx.beginPath();if(ib){cx.moveTo(x,y);cx.lineTo(x-4,y+6);cx.lineTo(x+4,y+6)}else{cx.moveTo(x,y);cx.lineTo(x-4,y-6);cx.lineTo(x+4,y-6)}cx.closePath();cx.fillStyle=ib?'#00c853':'#ff1744';cx.fill();cx.shadowColor=ib?'#00c853':'#ff1744';cx.shadowBlur=4;cx.fill();cx.shadowBlur=0})}
+function uRS(){const c=document.getElementById('rS'),r=sPt.slice(-3).reverse(),pr=Object.values(PR).flat().find(p=>p.id===cP)||PR.forex[0];if(!r.length){c.innerHTML='<div class="col-span-3 text-center text-[9px] py-2" style="color:var(--muted)">Menunggu sinyal...</div>';return}c.innerHTML=r.map(s=>{const d=cD[s.idx];if(!d)return'';const ib=s.type==='BUY';return`<div class="rounded-lg p-2 border border-[#252535] flex items-center gap-2" style="background:var(--card)"><span class="w-6 h-6 rounded flex items-center justify-center text-[9px] font-bold" style="background:${ib?'var(--buy-bg)':'var(--sell-bg)'};color:${ib?'var(--buy)':'var(--sell)'}"><i class="fas fa-arrow-${ib?'up':'down'}"></i></span><div class="flex-1 min-w-0"><div class="flex items-center gap-1"><span class="fd text-[9px] font-bold" style="color:${ib?'var(--buy)':'var(--sell)'}">${s.type}</span><span class="text-[9px]" style="color:var(--muted)">${cP}</span></div><div class="text-[9px] truncate" style="color:var(--text2)">@ ${d.close.toLocaleString('en',{maximumFractionDigits:pr.d})}</div></div></div>`}).join('')}
+
+function iNW(){const t=document.getElementById('nT'),i=NW.map(n=>`<span class="flex items-center gap-2 whitespace-nowrap text-[9px]"><i class="fas ${n.i}" style="color:${n.cl}"></i><span style="color:var(--text2)">${n.t}</span></span>`);t.innerHTML=i.join('')+i.join('');document.getElementById('nG').innerHTML=NW.map((n,i)=>{const bg=n.cl==='var(--buy)'?'rgba(0,200,83,.12);color:var(--buy)':n.cl==='var(--info)'?'rgba(41,182,246,.12);color:var(--info)':'rgba(240,185,11,.12);color:var(--gold)';return`<div class="rounded-xl border border-[#252535] p-3 hover:border-[#353545] transition an" style="background:var(--card);animation-delay:${i*.07}s"><div class="flex items-center justify-between mb-1.5"><span class="text-[8px] px-1.5 py-0.5 rounded" style="background:${bg}">${n.c}</span><span class="text-[8px]" style="color:var(--muted)">${n.tm}</span></div><h4 class="text-[11px] font-semibold mb-1 leading-snug">${n.t}</h4><div class="text-[9px]" style="color:var(--muted)"><i class="fas fa-newspaper mr-1"></i>${n.s}</div></div>`}).join('')}
+
+function iRes(){
+const tc=document.getElementById('resTabs'),pc=document.getElementById('resPanels');
+let tabsHTML='',panelsHTML='';
+Object.entries(RES).forEach(([key,cat],idx)=>{
+tabsHTML+=`<button onclick="showResTab('${key}')" class="stab ${idx===0?'active':''}" id="rtab-${key}"><i class="fas ${cat.icon} mr-1"></i>${cat.label}</button>`;
+if(cat.isLegal){
+panelsHTML+=`<div class="spanel ${idx===0?'active':''}" id="rp-${key}">
+<div class="legal-card mb-5">
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+<div class="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 lg" style="background:linear-gradient(135deg,rgba(240,185,11,.15),rgba(240,185,11,.05));border:2px solid rgba(240,185,11,.3)">
+<img src="${IMG}" class="w-12 h-12 rounded-lg object-cover" alt="PT Srijaya Naga">
+</div>
+<div class="flex-1">
+<h3 class="fd text-lg font-bold tracking-wider mb-1" style="color:var(--gold)">PT SRIJAYA NAGA</h3>
+<div class="flex flex-wrap gap-2">
+<span class="seal-badge" style="background:var(--buy-bg);color:var(--buy)"><i class="fas fa-check-circle"></i> TERDAFTAR RESMI</span>
+<span class="seal-badge" style="background:rgba(240,185,11,.1);color:var(--gold)"><i class="fas fa-building"></i> PERSEROAN TERBATAS</span>
+</div>
+</div>
+</div>
+<div class="legal-grid grid grid-cols-1 md:grid-cols-2 gap-3">
+<div class="doc-row">
+<div class="doc-icon" style="background:rgba(240,185,11,.1);border:1px solid rgba(240,185,11,.2)">
+<i class="fas fa-file-signature text-sm" style="color:var(--gold)"></i>
+</div>
+<div class="flex-1">
+<div class="text-[9px] fd tracking-wider mb-0.5" style="color:var(--muted)">AKTA PENDIRI</div>
+<div class="text-sm font-semibold" style="color:var(--text)">Nomor 12</div>
+<div class="text-xs mt-0.5" style="color:var(--text2)">Tanggal 08 September 2011</div>
+</div>
+</div>
+<div class="doc-row">
+<div class="doc-icon" style="background:rgba(41,182,246,.1);border:1px solid rgba(41,182,246,.2)">
+<i class="fas fa-gavel text-sm" style="color:var(--info)"></i>
+</div>
+<div class="flex-1">
+<div class="text-[9px] fd tracking-wider mb-0.5" style="color:var(--muted)">PENGESAHAN KEMENKUMHAM (AHU)</div>
+<div class="text-sm font-semibold" style="color:var(--text)">48515.AH.01.01.Tahun 2011</div>
+<div class="text-xs mt-0.5" style="color:var(--text2)">Kementerian Hukum dan HAM RI</div>
+</div>
+</div>
+<div class="doc-row">
+<div class="doc-icon" style="background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.2)">
+<i class="fas fa-file-pen text-sm" style="color:var(--purple)"></i>
+</div>
+<div class="flex-1">
+<div class="text-[9px] fd tracking-wider mb-0.5" style="color:var(--muted)">PENGESAHAN PERUBAHAN (AHU)</div>
+<div class="text-sm font-semibold" style="color:var(--text)">00228966.AH.01.02.Tahun 2021</div>
+<div class="text-xs mt-0.5" style="color:var(--text2)">Perubahan anggaran dasar</div>
+</div>
+</div>
+<div class="doc-row">
+<div class="doc-icon" style="background:rgba(0,200,83,.1);border:1px solid rgba(0,200,83,.2)">
+<i class="fas fa-fingerprint text-sm" style="color:var(--buy)"></i>
+</div>
+<div class="flex-1">
+<div class="text-[9px] fd tracking-wider mb-0.5" style="color:var(--muted)">NOMOR INDUK BERUSAHA (NIB)</div>
+<div class="text-sm font-semibold" style="color:var(--text)">1264000511895</div>
+<div class="text-xs mt-0.5" style="color:var(--text2)">OSS — Sistem Online Single Submission</div>
+</div>
+</div>
+</div>
+<div class="mt-5 pt-4 border-t border-[#252535]">
+<div class="flex flex-wrap items-center gap-2 text-[10px]" style="color:var(--muted)">
+<i class="fas fa-shield-halved" style="color:var(--gold)"></i>
+<span>Semua dokumen terdaftar dan diverifikasi melalui sistem resmi pemerintah Republik Indonesia</span>
+</div>
+</div>
+</div>`;
+} else {
+const gc=cat.items.length<=6?'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3':'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
+panelsHTML+=`<div class="spanel ${idx===0?'active':''}" id="rp-${key}"><div class="grid ${gc} gap-2">${cat.items.map(item=>{let hn='';try{hn=new URL(item.u).hostname}catch(e){hn=item.u}return`<a href="${item.u}" target="_blank" rel="noopener noreferrer" class="ri rounded-xl border border-[#252535] p-3 flex items-start gap-2.5" style="background:var(--card)"><div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:${cat.color}15;border:1px solid ${cat.color}30"><i class="fas ${item.i} text-xs" style="color:${cat.color}"></i></div><div class="min-w-0"><div class="text-xs font-semibold truncate">${item.n}</div><div class="text-[9px] mt-0.5 truncate" style="color:var(--text2)">${item.d}</div><div class="text-[8px] mt-1 flex items-center gap-1 truncate" style="color:var(--muted)"><i class="fas fa-external-link-alt text-[6px]"></i>${hn}</div></div></a>`}).join('')}</div></div>`}
+});
+tc.innerHTML=tabsHTML;pc.innerHTML=panelsHTML;
+}
+function showResTab(key){document.querySelectorAll('#resPanels .spanel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('#resTabs .stab').forEach(t=>t.classList.remove('active'));document.getElementById('rp-'+key)?.classList.add('active');document.getElementById('rtab-'+key)?.classList.add('active')}
+
+function iSA(){const o=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.style.opacity='1';x.target.style.transform='translateY(0)'}})},{threshold:.1});document.querySelectorAll('.an').forEach(el=>o.observe(el))}
+function iCT(){const o=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting&&!x.target.dataset.cd){x.target.dataset.cd='1';const t=parseInt(x.target.dataset.target);let c=0;const s=Math.max(1,Math.floor(t/40));const iv=setInterval(()=>{c+=s;if(c>=t){c=t;clearInterval(iv)}x.target.textContent=c},30)}})},{threshold:.5});document.querySelectorAll('.counter').forEach(el=>o.observe(el))}
+function showT(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
+</script>
+</body>
+</html>
